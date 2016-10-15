@@ -1,11 +1,11 @@
-def to_array(a, frmt='{:1.2f}', arraytype='bmatrix'):
+def to_latex(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """Returns a LaTeX array
     :a: numpy array
     :returns: 
     :prints: LaTeX array
 
     Example:
-    to_array(Krm, frmt = '{:6.2f}', arraytype = 'array')
+    to_latex(Krm, frmt = '{:6.2f}', arraytype = 'array')
     """
     if len(a.shape) > 2:
         raise ValueError('bmatrix can at most display two dimensions')

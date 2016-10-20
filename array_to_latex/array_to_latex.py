@@ -1,5 +1,5 @@
 
-def array_to_clipboard(a, frmt='{:1.2f}', arraytype='bmatrix'):
+def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """
     Returns a LaTeX array the the clipboard given a numpy array
 
@@ -18,10 +18,10 @@ def array_to_clipboard(a, frmt='{:1.2f}', arraytype='bmatrix'):
     --------
     array_to_latex
 
-    See `array_to_latex` for examples 
+    See `to_ltx` for examples
     """
 
-    b = array_to_latex(a, frmt = frmt, arraytype = arraytype)
+    b = to_ltx(a, frmt = frmt, arraytype = arraytype)
     try:
         import clipboard
         clipboard.copy(b)
@@ -31,7 +31,7 @@ def array_to_clipboard(a, frmt='{:1.2f}', arraytype='bmatrix'):
 
     return
 
-def array_to_latex(a, frmt='{:1.2f}', arraytype='bmatrix'):
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """
     Returns a LaTeX array given a numpy array
 
@@ -48,24 +48,24 @@ def array_to_latex(a, frmt='{:1.2f}', arraytype='bmatrix'):
 
     See Also
     --------
-    array_to_clipboard
+    to_clp
 
     Examples
     --------
     >>> import numpy as np
-    >>> from array_to_latex import *
+    >>> import array_to_latex import as ar
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    >>> array_to_latex(A, frmt = '{:6.2f}', arraytype = 'array')
+    >>> ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
     \\begin{array}
       1.23 &  23.46\\\\
     456.23 &   8.24\\\\
     \\end{array}
-    >>> array_to_latex(A, frmt = '{:6.2e}', arraytype = 'array')
+    >>> ar.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
     \\begin{array}
     1.23e+00 & 2.35e+01\\\\
     4.56e+02 & 8.24e+00\\\\
     \\end{array}
-    >>> array_to_latex(A, frmt = '{:.3g}', arraytype = 'array')
+    >>> ar.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
     \\begin{array}
     1.23 & 23.5\\\\
     456 & 8.24\\\\

@@ -2,6 +2,8 @@
 array_to_latex/__pycache__
  Untitled*.*
 
+__pycache__/*
+.cache/*
 *.gz
 
 array_to_latex.egg*

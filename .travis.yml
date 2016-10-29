@@ -19,7 +19,7 @@ before_install:
   - sudo apt-get install -y python-numpy python3-numpy
 
 install:
-  - pip --user install .
+  - pip install --user .
 
 script:
   - python array_to_latex.py

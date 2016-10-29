@@ -12,12 +12,12 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='array_to_latex',
-      version='0.32b',
+      version='0.33b',
       description='Return Numpy arrays as formatted LaTeX arrays. pip install --user array_to_latex',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',
       url='https://github.com/josephcslater/array_to_latex/',
-      download_url='https://github.com/josephcslater/array_to_latex/archive/0.32b.tar.gz',
+      download_url='https://github.com/josephcslater/array_to_latex/archive/0.33b.tar.gz',
       packages=['array_to_latex'],
       long_description = read('README.md'),
       keywords=['latex','array','format','numpy'],

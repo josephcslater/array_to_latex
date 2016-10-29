@@ -1,5 +1,5 @@
 # numpy, sympy not whitelisted by travis; need sudo
-sudo: false
+sudo: true
 
 language: python
 
@@ -9,6 +9,7 @@ python:
     - "3.2"
     - "3.3"
     - "3.4"
+    - "3.5"
 
 
 virtualenv:

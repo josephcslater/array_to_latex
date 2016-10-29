@@ -18,9 +18,9 @@ Please read the help which explains usage.
 
 will print the latex code to your ouput.
 
-  .. code-block:: python:
+.. code-block:: python:
 
->>> import numpy as np
+  >>> import numpy as np
   >>> import array_to_latex as ar
   >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
   >>> ar.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
@@ -28,3 +28,8 @@ will print the latex code to your ouput.
 will put the array onto your clipboard.
 
 More detailed information on usage is in the help.
+
+.. code-block:: python:
+
+  >>> import array_to_latex as ar
+  >>> help(ar.to_clp)

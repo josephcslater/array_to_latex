@@ -24,4 +24,4 @@ install:
   - pip install .
 
 script:
-  - nosetests   --with-doctest --doctest-tests
+  - nosetests   --with-doctest --doctest-tests --doctest-extension= 'array_to_latex' 

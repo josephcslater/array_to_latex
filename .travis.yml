@@ -19,6 +19,7 @@ before_install:
   - sudo apt-get install -y python-numpy python3-numpy
 
 install:
+  - pip install clipboard
   - pip install .
 
 script:

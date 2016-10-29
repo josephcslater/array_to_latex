@@ -9,6 +9,8 @@ To test release
 python setup.py register -r pypitest
 python setup.py sdist upload -r pypitest
 
+look at https://testpypi.python.org/pypi
+
 To release
 ----------------
 python setup.py register -r pypi

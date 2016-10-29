@@ -2,10 +2,10 @@
 Convert Numpy/Scipy arrays to formatted LaTeX arrays
 ------------------------------------------------------
 
-`array_to_latex` converts a Numpy/Scipy array to a LaTeX array including
-python (c) style formating of the result.
+``array_to_latex`` converts a Numpy/Scipy array to a LaTeX array including
+`Python style <https://mkaz.tech/python-string-format.html>`_ formating of the result.
 
-Install using `pip install --user array_to_latex`
+Install using ``pip install --user array_to_latex``
 
 Please read the help which explains usage.
 
@@ -16,7 +16,7 @@ Please read the help which explains usage.
   >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
   >>> ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
 
-will print the latex code to your ouput.
+will print the LaTeX code to your ouput.
 
 .. code-block:: python:
 

@@ -4,8 +4,6 @@ sudo: true
 language: python
 
 python:
-    - "3.0"
-    - "3.1"
     - "3.2"
     - "3.3"
     - "3.4"
@@ -24,4 +22,4 @@ install:
   - pip install .
 
 script:
-  - nosetests   --with-doctest --doctest-tests --doctest-extension= 'array_to_latex' 
+  - nosetests   --with-doctest --doctest-tests --doctest-extension= 'array_to_latex'

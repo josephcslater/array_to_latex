@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+#from distutils.core import setup
+from setuptools import setup
 import os
-#from setuptools import setup
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -13,13 +13,13 @@ def read(fname):
 
 setup(name='array_to_latex',
       version='0.33b',
-      description='Return Numpy arrays as formatted LaTeX arrays. pip install --user array_to_latex',
+      description='Return Numpy arrays as formatted LaTeX arrays.',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',
       url='https://github.com/josephcslater/array_to_latex/',
-      download_url='https://github.com/josephcslater/array_to_latex/archive/0.33b.tar.gz',
+      download_url='https://github.com/josephcslater/array_to_latex/archive/0.34b.tar.gz',
       packages=['array_to_latex'],
-      long_description = read('README.md'),
+      long_description = read('README.rst'),
       keywords=['latex','array','format','numpy'],
       install_requires=[
       'numpy',

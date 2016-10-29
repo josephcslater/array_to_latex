@@ -1,5 +1,5 @@
 
-def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
+def to_clp(a, frmt='{:1.2f}', arraytype = 'bmatrix'):
     """
     Returns a LaTeX array the the clipboard given a numpy array
 
@@ -7,6 +7,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     ----------
     a         : array
     frmt      : python 3 formatter, optional
+                https://mkaz.tech/python-string-format.html
     arraytype : latex array type- `bmatrix` default, optional
 
     Returns:
@@ -18,10 +19,18 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     --------
     array_to_latex
 
-    See `to_ltx` for examples
+    Examples
+    ________
+    >>> import numpy as np
+    >>> import array_to_latex as ar
+    >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
+    >>> ar.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
+
+    Note that the output is in your clipboard, so you won't see any results.
+    See `to_ltx` for further examples
     """
 
-    b = to_ltx(a, frmt = frmt, arraytype = arraytype)
+    b = to_ltx(a, frmt = frmt, arraytype = arraytype, nargout = 1)
     try:
         import clipboard
         clipboard.copy(b)
@@ -31,7 +40,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
 
     return
 
-def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix'):
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout = 0):
     """
     Returns a LaTeX array given a numpy array
 
@@ -39,6 +48,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix'):
     ----------
     a         : array
     frmt      : python 3 formatter, optional
+                https://mkaz.tech/python-string-format.html
     arraytype : latex array type- `bmatrix` default, optional
 
     Returns:
@@ -53,7 +63,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix'):
     Examples
     --------
     >>> import numpy as np
-    >>> import array_to_latex import as ar
+    >>> import array_to_latex as ar
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
     \\begin{array}
@@ -74,19 +84,32 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix'):
     if len(a.shape) > 2:
         raise ValueError('bmatrix can at most display two dimensions')
     lines = str(a).replace('[', '').replace(']', '').splitlines()
-    print(r'\begin{' + arraytype + '}')
     a = r'\begin{' + arraytype + '}\n'
     for l in lines:
         for i, num in enumerate(l.split()):
             if i is 0:
-                print(frmt.format(float(num)), end="")
-                #print('& ', end="")
                 a = a + frmt.format(float(num))
             else:
-                print(' ' + '& ' + frmt.format(float(num)), end="")
                 a = a + ' ' + '& ' + frmt.format(float(num))
-        print(r'\\')
         a = a + r'\\' + '\n'
-    print(r'\end{' + arraytype + '}')
     a = a + r'\end{' + arraytype + '}'
-    return a
+    if nargout == 1:
+        return a
+    else:
+        print(a)
+        return
+
+if __name__ == "__main__":
+    import doctest
+    import array_to_latex as ar
+
+    doctest.testmod(optionflags=doctest.ELLIPSIS)
+    """ What this does.
+    python (name of this file)  -v
+    will test all of the examples in the help.
+
+    Leaving off -v will run the tests without any output. Success will return nothing.
+
+    See the doctest section of the python manual.
+    https://docs.python.org/3.5/library/doctest.html
+    """

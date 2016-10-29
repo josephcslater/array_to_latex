@@ -1,4 +1,6 @@
-# Convert Numpy/Scipy arrays to formatted LaTeX arrays
+
+Convert Numpy/Scipy arrays to formatted LaTeX arrays
+------------------------------------------------------
 
 `array_to_latex` converts a Numpy/Scipy array to a LaTeX array including
 python (c) style formating of the result.
@@ -25,4 +27,4 @@ will print the latex code to your ouput.
 
 will put the array onto your clipboard.
 
-More detailed information on usage is in the help. 
+More detailed information on usage is in the help.

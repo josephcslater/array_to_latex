@@ -22,4 +22,5 @@ install:
   - pip install .
 
 script:
-  - python array_to_latex.py
+  - ls
+  - python array_to_latex/array_to_latex.py

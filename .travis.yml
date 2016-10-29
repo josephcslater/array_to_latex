@@ -24,8 +24,4 @@ install:
   - pip install .
 
 script:
-  - ls
-  - python array_to_latex/array_to_latex.py
-  - cd array_to_latex
-  - ls
-  - nosetests -v  --with-doctest --doctest-tests --doctest-extension = "array_to_latex" 
+  - nosetests   --with-doctest --doctest-tests

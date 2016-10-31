@@ -4,11 +4,10 @@ sudo: true
 language: python
 
 python:
-    - "3.2"
-    - "3.3"
-    - "3.4"
     - "3.5"
-    - ">3.5"
+#    - "3.3"
+#    - "3.4"
+#    - "3.2"
 
 
 #virtualenv:
@@ -22,4 +21,6 @@ install:
   - pip install .
 
 script:
-  - nosetests   --with-doctest --doctest-tests --doctest-extension= 'array_to_latex'
+  - nosetests   --with-doctest --doctest-tests
+
+#--doctest-extension= 'array_to_latex'

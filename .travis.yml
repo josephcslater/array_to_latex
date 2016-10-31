@@ -18,9 +18,9 @@ before_install:
 
 install:
   - pip install clipboard
-  - pip install .
+  - pip install --user .
 
 script:
-  - nosetests   --with-doctest --doctest-tests
+  - nosetests --with-doctest --doctest-tests
 
 #--doctest-extension= 'array_to_latex'

@@ -18,7 +18,7 @@ before_install:
 
 install:
   - pip install clipboard
-  - pip install --user .
+  - pip install .
 
 script:
   - nosetests --with-doctest --doctest-tests

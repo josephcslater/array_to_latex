@@ -34,3 +34,5 @@ More detailed information on usage is in the help.
 
     import array_to_latex as ar
     help(ar.to_ltx)
+
+An interesting alternative approach is `np array to latex <https://github.com/bbercovici/np_array_to_latex>`_.

@@ -1,6 +1,11 @@
 Convert Numpy/Scipy arrays to formatted LaTeX arrays
 ====================================================
 
+
+.. image:: https://badge.fury.io/py/array_to_latex.png/
+    :target: http://badge.fury.io/py/array_to_latex
+    
+    
 The package ``array_to_latex`` converts a Numpy/Scipy array to a LaTeX
 array including `Python 3.x
 style <https://mkaz.tech/python-string-format.html>`__ formating of the

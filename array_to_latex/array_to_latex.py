@@ -1,5 +1,5 @@
 
-def to_clp(a, frmt='{:1.2f}', arraytype = 'bmatrix'):
+def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """
     Returns a LaTeX array the the clipboard given a numpy array
 
@@ -30,7 +30,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype = 'bmatrix'):
     See `to_ltx` for further examples
     """
 
-    b = to_ltx(a, frmt = frmt, arraytype = arraytype, nargout = 1)
+    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1)
     try:
         import clipboard
         clipboard.copy(b)
@@ -40,7 +40,8 @@ def to_clp(a, frmt='{:1.2f}', arraytype = 'bmatrix'):
 
     return
 
-def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout = 0):
+
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0):
     """
     Returns a LaTeX array given a numpy array
 
@@ -98,6 +99,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout = 0):
     else:
         print(a)
         return
+
 
 if __name__ == "__main__":
     import doctest

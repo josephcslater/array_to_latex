@@ -1,4 +1,4 @@
-Convert Numpy/Scipy arrays to formatted LaTeX arrays
+Convert NumPy/SciPy arrays to formatted LaTeX arrays
 ====================================================
 
 
@@ -6,9 +6,9 @@ Convert Numpy/Scipy arrays to formatted LaTeX arrays
     :target: http://badge.fury.io/py/array_to_latex
     
     
-The package ``array_to_latex`` converts a Numpy/Scipy array to a LaTeX
+The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX
 array including `Python 3.x
-style <https://mkaz.tech/python-string-format.html>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__ formating of the
+style <https://mkaz.tech/python-string-format.html>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formating of the
 result.
 
 Install using ``pip install --user array_to_latex``

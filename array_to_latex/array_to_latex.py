@@ -1,3 +1,4 @@
+import numpy as np
 
 def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """
@@ -5,13 +6,17 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
 
     Parameters
     ----------
-    a         : array
-    frmt      : python 3 formatter, optional
-                https://mkaz.tech/python-string-format.html
-    arraytype : latex array type- `bmatrix` default, optional
+    a         : float array
+    frmt      : string
+        python 3 formatter, optional-
+        https://mkaz.tech/python-string-format.html
+    arraytype : string
+        latex array type- `bmatrix` default, optional
+    imstring : string (optional)
+        usually i or j
 
-    Returns:
-    --------
+    Returns
+    -------
     out: str
         LaTeX array
 
@@ -41,19 +46,23 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     return
 
 
-def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0):
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
     """
     Returns a LaTeX array given a numpy array
 
     Parameters
     ----------
-    a         : array
-    frmt      : python 3 formatter, optional
-                https://mkaz.tech/python-string-format.html
-    arraytype : latex array type- `bmatrix` default, optional
+    a         : float array
+    frmt      : string
+        python 3 formatter, optional-
+        https://mkaz.tech/python-string-format.html
+    arraytype : string
+        latex array type- `bmatrix` default, optional
+    imstring : string (optional)
+        usually i or j
 
-    Returns:
-    --------
+    Returns
+    -------
     out: str
         LaTeX array
 
@@ -82,22 +91,32 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0):
     456 & 8.24\\\\
     \\end{array}
     """
+
     if len(a.shape) > 2:
         raise ValueError('bmatrix can at most display two dimensions')
-    lines = str(a).replace('[', '').replace(']', '').splitlines()
-    a = r'\begin{' + arraytype + '}\n'
-    for l in lines:
-        for i, num in enumerate(l.split()):
-            if i is 0:
-                a = a + frmt.format(float(num))
+
+    out = r'\begin{' + arraytype + '}\n'
+    for i in np.arange(a.shape[0]):
+        for j in np.arange(a.shape[1]):
+            if np.iscomplex(a[i,j]):
+                sumstring = ' +'
+                if np.imag(a[i,j]) < 0:
+                    sumstring = ' '
+                out = (out + frmt.format(np.real(a[i,j]))
+                           + sumstring
+                           + frmt.format(np.imag(a[i,j]))
+                           + imstring + ', ')
             else:
-                a = a + ' ' + '& ' + frmt.format(float(num))
-        a = a + r'\\' + '\n'
-    a = a + r'\end{' + arraytype + '}'
+                out = out + frmt.format(a[i,j]) + ', '
+        out = out[:-2]
+        out = out + '\\\\\n'
+
+    out = out + r'\end{' + arraytype + '}'
+
     if nargout == 1:
-        return a
+        return out
     else:
-        print(a)
+        print(out)
         return
 
 

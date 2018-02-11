@@ -7,3 +7,4 @@ __pycache__/*
 *.gz
 
 array_to_latex.egg*
+.DS_Store

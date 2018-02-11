@@ -12,7 +12,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='array_to_latex',
-      version='0.36',
+      version='0.37',
       description='Return Numpy arrays as formatted LaTeX arrays.',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',

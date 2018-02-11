@@ -97,21 +97,17 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
 
     out = r'\begin{' + arraytype + '}\n'
     for i in np.arange(a.shape[0]):
+        out = out + ' '
         for j in np.arange(a.shape[1]):
-            if np.iscomplex(a[i,j]):
-                sumstring = ' +'
-                if np.imag(a[i,j]) < 0:
-                    sumstring = ' '
-                out = (out + frmt.format(np.real(a[i,j]))
-                           + sumstring
-                           + frmt.format(np.imag(a[i,j]))
-                           + imstring + ', ')
+            if np.real(a[i,j]) < 0:
+                leadstr = ''
             else:
-                out = out + frmt.format(a[i,j]) + ', '
+                leadstr = ' '
+            out = out + leadstr + frmt.format(a[i,j]) + ', '
         out = out[:-2]
         out = out + '\\\\\n'
 
-    out = out + r'\end{' + arraytype + '}'
+    out = out[:-3] + '\n' + r'\end{' + arraytype + '}'
 
     if nargout == 1:
         return out

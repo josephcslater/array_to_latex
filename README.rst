@@ -12,6 +12,7 @@ style <https://mkaz.tech/python-string-format.html>`__ (or `alternatively <https
 | *New in* 0.38: Aligns columns neatly.
 | **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
 
+
 Install using ``pip install --user array_to_latex``
 
 Please read the help which explains usage.

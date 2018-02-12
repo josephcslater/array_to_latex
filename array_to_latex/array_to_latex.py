@@ -1,4 +1,7 @@
+"""Module array_to_latex."""
+
 import numpy as np
+
 
 def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     """
@@ -27,9 +30,9 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     Examples
     ________
     >>> import numpy as np
-    >>> import array_to_latex as ar
+    >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    >>> ar.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
+    >>> a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
 
     Note that the output is in your clipboard, so you won't see any results.
     See `to_ltx` for further examples
@@ -41,12 +44,12 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
         clipboard.copy(b)
     except ImportError:
         print('\nPackage ''clipboard'' is not installed')
-        print('pip install clipboard\nor install via other means to use this function')
-
+        print('pip install clipboard\nor install via other ',
+              'means to use this function')
     return
 
 
-def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
     """
     Returns a LaTeX array given a numpy array
 
@@ -73,22 +76,22 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
     Examples
     --------
     >>> import numpy as np
-    >>> import array_to_latex as ar
+    >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    >>> ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+    >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
     \\begin{array}
-      1.23 &  23.46\\\\
-    456.23 &   8.24\\\\
+        1.23 &   23.46\\\\
+      456.23 &    8.24
     \\end{array}
-    >>> ar.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
+    >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
     \\begin{array}
-    1.23e+00 & 2.35e+01\\\\
-    4.56e+02 & 8.24e+00\\\\
+      1.23e+00 &  2.35e+01\\\\
+      4.56e+02 &  8.24e+00
     \\end{array}
-    >>> ar.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
+    >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
     \\begin{array}
-    1.23 & 23.5\\\\
-    456 & 8.24\\\\
+      1.23 &  23.5\\\\
+      456 &  8.24
     \\end{array}
     """
 
@@ -99,12 +102,17 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
     for i in np.arange(a.shape[0]):
         out = out + ' '
         for j in np.arange(a.shape[1]):
-            if np.real(a[i,j]) < 0:
+            if np.real(a[i, j]) < 0:
                 leadstr = ''
             else:
                 leadstr = ' '
-            out = out + leadstr + frmt.format(a[i,j]) + ', '
-        out = out[:-2]
+            if '.' not in frmt.format(a[i, j]):
+                dot_space = ' '
+            else:
+                dot_space = ''
+            out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
+                   + dot_space + ' & ')
+        out = out[:-3]
         out = out + '\\\\\n'
 
     out = out[:-3] + '\n' + r'\end{' + arraytype + '}'
@@ -114,19 +122,3 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring = 'j'):
     else:
         print(out)
         return
-
-
-if __name__ == "__main__":
-    import doctest
-    import array_to_latex as ar
-
-    doctest.testmod(optionflags=doctest.ELLIPSIS)
-    """ What this does.
-    python (name of this file)  -v
-    will test all of the examples in the help.
-
-    Leaving off -v will run the tests without any output. Success will return nothing.
-
-    See the doctest section of the python manual.
-    https://docs.python.org/3.5/library/doctest.html
-    """

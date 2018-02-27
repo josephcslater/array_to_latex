@@ -11,6 +11,7 @@ style <https://mkaz.tech/python-string-format.html>`__ (or `alternatively <https
 | *New in* 0.37: Now handles complex arrays.
 | *New in* 0.38: Aligns columns neatly.
 | **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
+| **0.41: Critical upgrade- 0.37-0.40 formatted incorrectly.**
 
 Install using ``pip install --user array_to_latex``
 

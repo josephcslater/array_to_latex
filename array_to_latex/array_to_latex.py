@@ -110,8 +110,13 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
                 dot_space = ' '
             else:
                 dot_space = ''
-            out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
-                   + dot_space + ' & ')
+            if np.iscomplexobj(a[i,j]):
+                out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
+                    + dot_space + ' & ')
+            else:
+                out = (out + leadstr + frmt.format(a[i, j])[:-1]
+                    + dot_space + ' & ')
+
         out = out[:-3]
         out = out + '\\\\\n'
 

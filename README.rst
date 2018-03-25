@@ -3,6 +3,9 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
 
 .. image:: https://badge.fury.io/py/array_to_latex.png/
     :target: http://badge.fury.io/py/array_to_latex
+    
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg 
+    :target: https://saythanks.io/to/josephcslater
 
 The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX
 array including `Python 3.x

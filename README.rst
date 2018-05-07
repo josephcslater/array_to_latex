@@ -9,7 +9,7 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
 
 The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX
 array including `Python 3.x
-style <https://mkaz.tech/python-string-format.html>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formatting of the result.
+style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formatting of the result.
 
 | *New in* 0.37: Now handles complex arrays.
 | *New in* 0.38: Aligns columns neatly.

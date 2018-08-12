@@ -6,9 +6,9 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
     
 .. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg 
     :target: https://saythanks.io/to/josephcslater
-   
-.. image:: http://pepy.tech/badge/arraytolatex
-   :target: http://pepy.tech/project/arraytolatex
+    
+.. image:: http://pepy.tech/badge/array_to_latex
+   :target: http://pepy.tech/project/array_to_latex
    :alt: PyPi Download stats
    
 The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX

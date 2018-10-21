@@ -50,3 +50,5 @@ More detailed information on usage is in the help.
     help(ar.to_ltx)
 
 An interesting alternative approach is `np array to latex <https://github.com/bbercovici/np_array_to_latex>`_.
+
+Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_

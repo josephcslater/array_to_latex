@@ -194,13 +194,13 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
     \\end{array}
 
     """
-    if type(a) is _np.ndarray:
+    if isinstance(a, _np.ndarray):
         latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
                                    nargout=nargout, imstring=imstring)
         if nargout == 1:
             return latex
         print(latex)
-    if type(a) is _pd.core.frame.DataFrame:
+    if isinstance(a, _pd.core.frame.DataFrame):
         print('Still have to make this function. Sorry.')
         print('Returning the data portion.')
         a = _np.array(a)

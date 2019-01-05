@@ -3,7 +3,9 @@ Provides `to_ltx` and `to_clp` which convert numpy arrays to
 LaTeX form.
 """
 
-__all__ = ['to_clip', 'to_ltx', '__version__']
+# Note- version must also be set in setup.py
+__version__ = 0.43
+__all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
 __license__ = 'MIT'
@@ -11,9 +13,10 @@ __copyright__ = 'Copyright 2018 Joseph C. Slater'
 
 import numpy as _np
 
-def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
-    """
-    Returns a LaTeX array the the clipboard given a numpy array
+
+def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
+    r"""
+    Return a LaTeX array the the clipboard given a numpy array.
 
     Parameters
     ----------
@@ -24,7 +27,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     arraytype : string
         latex array type- `bmatrix` default, optional
     imstring : string (optional)
-        usually i or j
+        Character for square root of -1. Usually i or j
 
     Returns
     -------
@@ -36,17 +39,17 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
     array_to_latex
 
     Examples
-    ________
+    --------
     >>> import numpy as np
     >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
 
     Note that the output is in your clipboard, so you won't see any results.
-    See `to_ltx` for further examples
-    """
+    See `to_ltx` for further examples.
 
-    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1)
+    """
+    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1, imstring=imstring)
     try:
         import clipboard as _clipboard
         _clipboard.copy(b)
@@ -54,12 +57,11 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix'):
         print('\nPackage ''clipboard'' is not installed')
         print('pip install clipboard\nor install via other ',
               'means to use this function')
-    return
 
 
 def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
-    """
-    Returns a LaTeX array given a numpy array
+    r"""
+    Print a LaTeX array given a numpy array.
 
     Parameters
     ----------
@@ -70,7 +72,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
     arraytype : string
         latex array type- `bmatrix` default, optional
     imstring : string (optional)
-        usually i or j
+        Character for square root of -1. Usually i or j
 
     Returns
     -------
@@ -101,8 +103,8 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
       1.23 &  23.5\\\\
       456 &  8.24
     \\end{array}
-    """
 
+    """
     if len(a.shape) > 2:
         raise ValueError('bmatrix can at most display two dimensions')
 
@@ -118,12 +120,12 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
                 dot_space = ' '
             else:
                 dot_space = ''
-            if _np.iscomplexobj(a[i,j]):
+            if _np.iscomplexobj(a[i, j]):
                 out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
-                    + dot_space + ' & ')
+                       + dot_space + ' & ')
             else:
                 out = (out + leadstr + frmt.format(a[i, j])[:-1]
-                    + dot_space + ' & ')
+                       + dot_space + ' & ')
 
         out = out[:-3]
         out = out + '\\\\\n'
@@ -132,6 +134,5 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
 
     if nargout == 1:
         return out
-    else:
-        print(out)
-        return
+
+    print(out)

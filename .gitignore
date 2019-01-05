@@ -8,3 +8,4 @@ __pycache__/*
 
 array_to_latex.egg*
 .DS_Store
+.ipynb_checkpoints/Untitled-checkpoint.ipynb

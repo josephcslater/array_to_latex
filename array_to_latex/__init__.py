@@ -203,7 +203,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
     if type(a) is _pd.core.frame.DataFrame:
         print('Still have to make this function. Sorry.')
         print('Returning the data portion.')
-        a = _np.array([a])
+        a = _np.array(a)
         latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
                                    nargout=nargout, imstring=imstring)
         if nargout == 1:

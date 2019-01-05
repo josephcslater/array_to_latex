@@ -12,6 +12,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2018 Joseph C. Slater'
 
 import numpy as _np
+import pandas as _pd
 
 
 def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
@@ -59,9 +60,97 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
               'means to use this function')
 
 
-def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
+def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
+                       imstring='j', row = True):
     r"""
     Print a LaTeX array given a numpy array.
+
+    Parameters
+    ----------
+    a         : float array
+    frmt      : string
+        python 3 formatter, optional-
+        https://mkaz.tech/python-string-format.html
+    arraytype : string
+        latex array type- `bmatrix` default, optional
+    imstring : string (optional)
+        Character for square root of -1. Usually i or j
+    row      : Boolean
+        If the array is 1-D, should the output be a row (True) or column (False)
+
+    Returns
+    -------
+    out: str
+        LaTeX array
+
+    See Also
+    --------
+    to_clp
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import array_to_latex as a2l
+    >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
+    >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+    \\begin{array}
+        1.23 &   23.46\\\\
+      456.23 &    8.24
+    \\end{array}
+    >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
+    \\begin{array}
+      1.23e+00 &  2.35e+01\\\\
+      4.56e+02 &  8.24e+00
+    \\end{array}
+    >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
+    \\begin{array}
+      1.23 &  23.5\\\\
+      456 &  8.24
+    \\end{array}
+
+    """
+    if len(a.shape) > 2:
+        raise ValueError('bmatrix can at most display two dimensions')
+
+    if len(a.shape) == 1:
+        a = _np.array([a])
+        if row is False:
+            a = a.T
+
+    out = r'\begin{' + arraytype + '}\n'
+    for i in _np.arange(a.shape[0]):
+        out = out + ' '
+        for j in _np.arange(a.shape[1]):
+            if _np.real(a[i, j]) < 0:
+                leadstr = ''
+            else:
+                leadstr = ' '
+            if '.' not in frmt.format(a[i, j]):
+                dot_space = ' '
+            else:
+                dot_space = ''
+            if _np.iscomplexobj(a[i, j]):
+                out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
+                       + dot_space + ' & ')
+            else:
+                out = (out + leadstr + frmt.format(a[i, j])[:-1]
+                       + dot_space + ' & ')
+
+        out = out[:-3]
+        out = out + '\\\\\n'
+
+    out = out[:-3] + '\n' + r'\end{' + arraytype + '}'
+
+    if nargout == 1:
+        return out
+
+    print(out)
+
+
+def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
+           imstring='j'):
+    r"""
+    Print a LaTeX array given a numpy array or Pandas dataframe.
 
     Parameters
     ----------
@@ -105,34 +194,18 @@ def to_ltx(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0, imstring='j'):
     \\end{array}
 
     """
-    if len(a.shape) > 2:
-        raise ValueError('bmatrix can at most display two dimensions')
-
-    out = r'\begin{' + arraytype + '}\n'
-    for i in _np.arange(a.shape[0]):
-        out = out + ' '
-        for j in _np.arange(a.shape[1]):
-            if _np.real(a[i, j]) < 0:
-                leadstr = ''
-            else:
-                leadstr = ' '
-            if '.' not in frmt.format(a[i, j]):
-                dot_space = ' '
-            else:
-                dot_space = ''
-            if _np.iscomplexobj(a[i, j]):
-                out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
-                       + dot_space + ' & ')
-            else:
-                out = (out + leadstr + frmt.format(a[i, j])[:-1]
-                       + dot_space + ' & ')
-
-        out = out[:-3]
-        out = out + '\\\\\n'
-
-    out = out[:-3] + '\n' + r'\end{' + arraytype + '}'
-
-    if nargout == 1:
-        return out
-
-    print(out)
+    if type(a) is _np.ndarray:
+        latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
+                                   nargout=nargout, imstring=imstring)
+        if nargout == 1:
+            return latex
+        print(latex)
+    if type(a) is _pd.core.frame.DataFrame:
+        print('Still have to make this function. Sorry.')
+        print('Returning the data portion.')
+        a = _np.array([a])
+        latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
+                                   nargout=nargout, imstring=imstring)
+        if nargout == 1:
+            return latex
+        print(latex)

@@ -3,14 +3,14 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
 
 .. image:: https://badge.fury.io/py/array_to_latex.png/
     :target: http://badge.fury.io/py/array_to_latex
-    
-.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg 
+
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
     :target: https://saythanks.io/to/josephcslater
-    
+
 .. image:: http://pepy.tech/badge/array-to-latex
    :target: http://pepy.tech/project/array-to-latex
    :alt: PyPi Download stats
-   
+
 The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX
 array including `Python 3.x
 style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formatting of the result.
@@ -19,6 +19,8 @@ style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternativ
 | *New in* 0.38: Aligns columns neatly.
 | **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
 | **0.41: Critical upgrade- 0.37-0.40 formatted incorrectly.**
+| *New in* 0.43: Now handles 1-D Arrays. See new option ``row``
+| *New in* 0.50: Now works with Pandas dataframes
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 

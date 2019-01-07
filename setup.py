@@ -15,7 +15,7 @@ def read(fname):
 setup(name='array_to_latex',
       # Note: Version must also be set in __init__.py
       # Version must also be set in download_url.
-      version='0.43',
+      version='0.50',
       description='Return Numpy arrays as formatted LaTeX arrays.',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',

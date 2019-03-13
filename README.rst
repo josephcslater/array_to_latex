@@ -31,23 +31,23 @@ Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
-Please read the help which explains usage.
+Please read the help. It explains all options. To try it, see `the online mybinder.org demo <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_. It documents illustrates application to numerical Pandas DataFrames.
 
 .. code:: python
 
     import numpy as np
-    import array_to_latex as ar
+    import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+    a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
 
 will print the LaTeX code to your ouput.
 
 .. code:: python
 
     import numpy as np
-    import array_to_latex as ar
+    import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    ar.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
+    a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
 
 will put the array onto your clipboard.
 
@@ -55,8 +55,8 @@ More detailed information on usage is in the help.
 
 .. code:: python
 
-    import array_to_latex as ar
-    help(ar.to_ltx)
+    import array_to_latex as a2l
+    help(a2l.to_ltx)
 
 An interesting alternative approach is `np array to latex <https://github.com/bbercovici/np_array_to_latex>`_.
 

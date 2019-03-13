@@ -4,7 +4,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = 0.50
+__version__ = 0.51
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -216,9 +216,9 @@ def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
         out = out + '     '
         for column in columns:
             out += '& ' + column + ' '
-        out += r'\\'
+        out += r'\\\n'
 
-    out +='\n'
+#    out +='\n'
 
     if arraytype is 'tabular':
         out += '\\midrule\n'

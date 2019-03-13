@@ -1,4 +1,6 @@
 """
+Convert numpy arrays and numerical dataframes to LaTeX.
+
 Provides `to_ltx` and `to_clp` which convert numpy arrays to
 LaTeX form.
 """

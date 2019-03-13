@@ -14,9 +14,8 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
 .. image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
 
-
-The package ``array_to_latex`` converts a NumPy/SciPy array to a LaTeX
-array including `Python 3.x
+The package ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX
+array or table using `Python 3.x
 style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formatting of the result.
 
 Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
@@ -28,6 +27,7 @@ Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to
 | *New in* 0.43: Now handles 1-D Arrays. See new option ``row``
 | *New in* 0.50: Now works with Pandas DataFrames
 | *0.51: Bug fix- remove extra blank lines in DataFrame tabular output
+| *0.52: A few documentation typos fixed. No code changed. 
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -40,7 +40,7 @@ Please read the help which explains usage.
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     ar.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
 
-will print the LaTeX code to your ouput.
+will print the LaTeX code to your output.
 
 .. code:: python
 

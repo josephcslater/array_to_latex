@@ -25,7 +25,7 @@ setup(name='array_to_latex',
       # Note: Version must also be set in __init__.py
       # Version must also be set in download_url.
       version=version,
-      description='Return Numpy arrays as formatted LaTeX arrays.',
+      description='Return Numpy and Pandas arrays as formatted LaTeX arrays.',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',
       url='https://github.com/josephcslater/array_to_latex/',

@@ -6,7 +6,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.60'
+__version__ = '0.61'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -63,7 +63,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
 
 
 def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
-                       imstring='j', row = True):
+                       imstring='j', row=True):
     r"""
     Print a LaTeX array given a numpy array.
 
@@ -78,7 +78,8 @@ def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
     imstring : string (optional)
         Character for square root of -1. Usually i or j
     row      : Boolean
-        If the array is 1-D, should the output be a row (True) or column (False)
+        If the array is 1-D, should the output be
+            a row (True) or column (False)
 
     Returns
     -------
@@ -158,7 +159,7 @@ def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
 
 
 def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
-                       imstring='j', row = True):
+                      imstring='j', row=True):
     r"""
     Print a LaTeX array given a Pandas DataFrame array.
 
@@ -173,7 +174,8 @@ def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
     imstring : string (optional)
         Character for square root of -1. Usually i or j
     row      : Boolean
-        If the array is 1-D, should the output be a row (True) or column (False)
+        If the array is 1-D, should the output be
+            a row (True) or column (False)
 
     Returns
     -------
@@ -238,10 +240,11 @@ def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' ' + str(rows[i]) + ' & '
         for j in _np.arange(a.shape[1]):
-            if type(a[i,j]) is str:
+            if type(a[i, j]) is str:
                 leadstr = ' '
-                dot_space = (max([len(pet) for pet in a[:,j]]) - len(a[i,j])) * ' '
-                out = (out + leadstr + a[i,j] + dot_space + ' & ')
+                dot_space = (max([len(pet)
+                                  for pet in a[:, j]]) - len(a[i, j])) * ' '
+                out = (out + leadstr + a[i, j] + dot_space + ' & ')
             else:
                 if _np.real(a[i, j]) < 0:
                     leadstr = ''
@@ -340,7 +343,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
             arraytype = 'tabular'
 
         latex = _dataframetolatex(a, frmt=frmt, arraytype=arraytype,
-                                   nargout=nargout, imstring=imstring)
+                                  nargout=nargout, imstring=imstring)
         if nargout == 1:
             return latex
         print(latex)

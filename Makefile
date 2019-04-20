@@ -42,7 +42,6 @@ test:
 release: clean
 	pip install --user readme_renderer
 	#python setup.py check -r -s
-	pytest
 	#python setup.py register
 	rm -rf dist
 	python setup.py bdist_wheel
@@ -58,20 +57,6 @@ release: clean
 wheel:
 	rm -rf dist
 	python setup.py bdist_wheel
-
-wheel-dist: gh-pages
-	rm -rf dist
-	python setup.py bdist_wheel
-
-docs:
-	# Warnings become errors and stop build
-	export SPHINXOPTS=-W
-	# pip install sphinx-bootstrap-theme numpydoc sphinx ghp-import
-	# Run the make file in the docs directory
-	make -C docs clean
-	make -C docs html
-
-html: docs
 
 gh-pages:
 	git checkout master

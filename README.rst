@@ -1,8 +1,8 @@
 Convert NumPy/SciPy arrays to formatted LaTeX arrays
 ====================================================
 
-.. image:: https://badge.fury.io/py/array_to_latex.png/
-    :target: http://badge.fury.io/py/array_to_latex
+.. image:: https://badge.fury.io/py/array-to-latex.png/
+    :target: http://badge.fury.io/py/array-to-latex
 
 .. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
     :target: https://saythanks.io/to/josephcslater

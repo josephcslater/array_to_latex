@@ -240,7 +240,7 @@ def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' ' + str(rows[i]) + ' & '
         for j in _np.arange(a.shape[1]):
-            if type(a[i, j]) is str:
+            if isinstance(a[i, j], str):
                 leadstr = ' '
                 dot_space = (max([len(pet)
                                   for pet in a[:, j]]) - len(a[i, j])) * ' '

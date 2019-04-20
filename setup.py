@@ -11,11 +11,17 @@ def read(fname):
     """Read the readme.rst file."""
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+with open('array_to_latex/__init__.py', 'rb') as fid:
+  for line in fid:
+      line = line.decode('utf-8')
+      if line.startswith('__version__'):
+          version = line.strip().split()[-1][1:-1]
+          break
 
 setup(name='array_to_latex',
       # Note: Version must also be set in __init__.py
       # Version must also be set in download_url.
-      version='0.52',
+      version=version,
       description='Return Numpy arrays as formatted LaTeX arrays.',
       author='Joseph C. Slater',
       author_email='joseph.c.slater@gmail.com',

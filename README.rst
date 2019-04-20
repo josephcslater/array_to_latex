@@ -28,7 +28,7 @@ Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to
 | *New in* 0.50: Now works with Pandas DataFrames
 | *0.51*: Bug fix- remove extra blank lines in DataFrame tabular output
 | *0.52*: A few documentation typos fixed. No code changed.
-| *0.60*: Now handles strings in Pandas Dataframes 
+| *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 

@@ -6,7 +6,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = 0.52
+__version__ = 0.60
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -228,20 +228,25 @@ def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' ' + str(rows[i]) + ' & '
         for j in _np.arange(a.shape[1]):
-            if _np.real(a[i, j]) < 0:
-                leadstr = ''
-            else:
+            if type(a[i,j]) is str:
                 leadstr = ' '
-            if '.' not in frmt.format(a[i, j]):
-                dot_space = ' '
+                dot_space = (max([len(pet) for pet in a[:,j]]) - len(a[i,j])) * ' '
+                out = (out + leadstr + a[i,j] + dot_space + ' & ')
             else:
-                dot_space = ''
-            if _np.iscomplexobj(a[i, j]):
-                out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
-                       + dot_space + ' & ')
-            else:
-                out = (out + leadstr + frmt.format(a[i, j])[:-1]
-                       + dot_space + ' & ')
+                if _np.real(a[i, j]) < 0:
+                    leadstr = ''
+                else:
+                    leadstr = ' '
+                if '.' not in frmt.format(a[i, j]):
+                    dot_space = ' '
+                else:
+                    dot_space = ''
+                if _np.iscomplexobj(a[i, j]):
+                    out = (out + leadstr + frmt.format(a[i, j])[:-1] + imstring
+                        + dot_space + ' & ')
+                else:
+                    out = (out + leadstr + frmt.format(a[i, j])[:-1]
+                        + dot_space + ' & ')
 
         out = out[:-3]
         out += '\\\\\n'

@@ -20,15 +20,6 @@ style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternativ
 
 Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
 
-| *New in* 0.37: Now handles complex arrays.
-| *New in* 0.38: Aligns columns neatly.
-| **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
-| **0.41: Critical upgrade- 0.37-0.40 formatted incorrectly.**
-| *New in* 0.43: Now handles 1-D Arrays. See new option ``row``
-| *New in* 0.50: Now works with Pandas DataFrames
-| *0.51*: Bug fix- remove extra blank lines in DataFrame tabular output
-| *0.52*: A few documentation typos fixed. No code changed.
-| *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
 | *0.61*: Minor documentation improvements. No code changed. 
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
@@ -63,3 +54,15 @@ More detailed information on usage is in the help.
 An interesting alternative approach is `np array to latex <https://github.com/bbercovici/np_array_to_latex>`_.
 
 Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
+
+| *New in* 0.37: Now handles complex arrays.
+| *New in* 0.38: Aligns columns neatly.
+| **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
+| **0.41: Critical upgrade- 0.37-0.40 formatted incorrectly.**
+| *New in* 0.43: Now handles 1-D Arrays. See new option ``row``
+| *New in* 0.50: Now works with Pandas DataFrames
+| *0.51*: Bug fix- remove extra blank lines in DataFrame tabular output
+| *0.52*: A few documentation typos fixed. No code changed.
+| *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
+| *0.61*: Minor documentation improvements. No code changed. 
+

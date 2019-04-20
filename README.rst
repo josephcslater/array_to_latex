@@ -21,8 +21,7 @@ style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternativ
 Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
 
 | *0.61*: Minor documentation improvements. No code changed. 
-
-
+ 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
 Please read the help. It explains all options. To try it, see `the online mybinder.org demo <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_. It documents illustrates application to numerical Pandas DataFrames.

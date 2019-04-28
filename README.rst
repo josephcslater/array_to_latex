@@ -18,7 +18,7 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 **PLEASE PROVIDE BUG REPORTS!** There are over 40,000 installs and no bug reports- but I'm finding them. I don't have exhaustive tests, so I am missing things as I add features. Just let me know and I can quickly patch.
 
-Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
+Play with it on `mybinder.org`_!
 
 *0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
 *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
@@ -70,3 +70,4 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 
 .. _`Python 3.x style`: https://mkaz.blog/code/python-string-format-cookbook/
+.. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

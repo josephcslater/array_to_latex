@@ -20,9 +20,10 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 Play with it on `mybinder.org`_!
 
-| *0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
+| *0.70*: Added ``mathform``. When set to ``True`` (default), returns 10 to superscript form.
 | *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
+| *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -67,9 +68,11 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.52*: A few documentation typos fixed. No code changed.
 | *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
 | *0.61*: Minor documentation improvements. No code changed.
-| *0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
+| *0.70*: Added ``mathform``. When set to ``True`` (default), returns 10 to superscript form.
 | *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
+| *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
+
 
 .. _`Python 3.x style`: https://mkaz.blog/code/python-string-format-cookbook/
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

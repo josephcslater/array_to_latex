@@ -6,7 +6,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.70'
+__version__ = '0.71'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'

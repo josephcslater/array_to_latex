@@ -20,9 +20,9 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 Play with it on `mybinder.org`_!
 
-*0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
-*0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
-*0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
+| *0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
+| *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
+| *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 

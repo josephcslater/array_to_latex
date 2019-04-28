@@ -20,8 +20,8 @@ style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternativ
 
 Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
 
-*0.61*: Minor documentation improvements. No code changed. 
- 
+*0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.
+
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
 Please read the help. It explains all options. To try it, see `the online mybinder.org demo <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_. It documents illustrates application to numerical Pandas DataFrames.
@@ -64,5 +64,5 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.51*: Bug fix- remove extra blank lines in DataFrame tabular output
 | *0.52*: A few documentation typos fixed. No code changed.
 | *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
-| *0.61*: Minor documentation improvements. No code changed. 
-
+| *0.61*: Minor documentation improvements. No code changed.
+| *0.70*: Added ``mathform``. When set to ``True`` (default), returns :math:`\times 10^n` form.

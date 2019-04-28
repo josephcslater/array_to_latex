@@ -14,9 +14,11 @@ Convert NumPy/SciPy arrays to formatted LaTeX arrays
 .. image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
 
-The package ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX
+The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX
 array or table using `Python 3.x
 style <https://mkaz.blog/code/python-string-format-cookbook/>`__ (or `alternatively <https://www.python-course.eu/python3_formatted_output.php>`__) formatting of the result.
+
+**PLEASE PROVIDE BUG REPORTS!** There are over 40,000 installs and no bug reports- but I'm finding them. I don't have exhaustive tests, so I am missing things as I add features. Just let me know and I can quickly patch. 
 
 Play with it on `mybinder.org <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_!
 

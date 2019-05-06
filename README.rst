@@ -47,7 +47,14 @@ will print the LaTeX code to your output.
 
 will put the array onto your clipboard.
 
-More detailed information on usage is in the help.
+If you will be using the same conversion over and over, you can define your own by using a ``lambda`` function:
+
+.. code:: python
+
+    to_tex = lambda A : a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array', mathform=True)
+    to_tex(A)
+
+so you can now use your function ``to_tex`` repeatedly with your specified settings. More detailed information on usage is in the help.
 
 .. code:: python
 
@@ -74,5 +81,5 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
 
 
-.. _`Python 3.x style`: https://mkaz.blog/code/python-string-format-cookbook/
+.. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

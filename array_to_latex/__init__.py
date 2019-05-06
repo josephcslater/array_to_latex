@@ -62,7 +62,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
               'means to use this function')
 
 
-def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
+def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
                        imstring='j', row=True, mathform=True):
     r"""
     Print a LaTeX array given a numpy array.
@@ -165,8 +165,13 @@ def _numpyarraytolatex(a, frmt='{:1.2f}', arraytype='bmatrix', nargout=0,
     return
 
 
-def _dataframetolatex(df, frmt='{:1.2f}', arraytype='tabular', nargout=0,
-                      imstring='j', row=True, mathform=True):
+def _dataframetolatex(df,
+                      frmt='{:6.2f}',
+                      arraytype='tabular',
+                      nargout=0,
+                      imstring='j',
+                      row=True,
+                      mathform=True):
     r"""
     Print a LaTeX array given a Pandas DataFrame array.
 
@@ -369,6 +374,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
             return latex
         print(latex)
 
+    '''if nargout == 1:
+        return latex
+    print(latex)'''
     return
 
 

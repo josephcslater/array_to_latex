@@ -43,6 +43,15 @@ will print the LaTeX code to your output.
     import numpy as np
     import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
+    latex_code = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+
+will put the LaTeX code into variable ``latex_code``.
+
+.. code:: python
+
+    import numpy as np
+    import array_to_latex as a2l
+    A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
 
 will put the array onto your clipboard.

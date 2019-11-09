@@ -6,7 +6,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.73'
+__version__ = '0.75'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -161,8 +161,8 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     if nargout == 1:
         return out
 
-    print(out)
-    return
+    # print(out)
+    return out
 
 
 def _dataframetolatex(df,
@@ -360,24 +360,14 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
         latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
                                    nargout=nargout, imstring=imstring,
                                    row=row, mathform=mathform)
-        if nargout == 1:
-            return latex
-        print(latex)
+
     if isinstance(a, _pd.core.frame.DataFrame):
 
         if arraytype is None:
             arraytype = 'tabular'
-
         latex = _dataframetolatex(a, frmt=frmt, arraytype=arraytype,
                                   nargout=nargout, imstring=imstring)
-        if nargout == 1:
-            return latex
-        print(latex)
-
-    '''if nargout == 1:
-        return latex
-    print(latex)'''
-    return
+    return latex
 
 
 def math_form(number, is_imaginary=False, mathform=True):

@@ -6,7 +6,7 @@ LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.75'
+__version__ = '0.76'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -298,7 +298,7 @@ def _dataframetolatex(df,
 
 
 def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
-           imstring='j', row=True, mathform=True):
+           imstring='j', row=True, mathform=True, print_out=True):
     r"""
     Print a LaTeX array given a numpy array or Pandas dataframe.
 
@@ -367,6 +367,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
             arraytype = 'tabular'
         latex = _dataframetolatex(a, frmt=frmt, arraytype=arraytype,
                                   nargout=nargout, imstring=imstring)
+    if print_out is True:
+        print(latex)
+
     return latex
 
 

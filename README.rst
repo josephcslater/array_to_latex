@@ -24,6 +24,12 @@ Play with it on `mybinder.org`_!
 | *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
+| *0.74*: Not released
+| *0.75*: output improvements (short-lived release)
+| *0.76*: Printing made better, allows outputs, added ``print_out``
+|         boolean to turn off printing
+
+
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 

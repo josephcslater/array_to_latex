@@ -20,16 +20,8 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 Play with it on `mybinder.org`_!
 
-| *0.70*: Added ``mathform``. When set to ``True`` (default), returns 10 to superscript form.
-| *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
-| *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
-| *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
-| *0.74*: Not released
-| *0.75*: output improvements (short-lived release)
 | *0.76*: Printing made better, allows outputs, added ``print_out``
 |         boolean to turn off printing
-
-
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -40,7 +32,7 @@ Please read the help. It explains all options. To try it, see `the online mybind
     import numpy as np
     import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+    _ = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
 
 will print the LaTeX code to your output.
 
@@ -94,6 +86,10 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
 | *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
+| *0.74*: Not released
+| *0.75*: output improvements (short-lived release)
+| *0.76*: Printing made better, allows outputs, added ``print_out``
+|         boolean to turn off printing
 
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html

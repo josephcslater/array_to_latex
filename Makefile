@@ -47,9 +47,9 @@ release: clean
 	python setup.py bdist_wheel
 	# python setup.py sdist
 	git tag v$(VERSION)
-	twine upload dist/*
 	git push origin --all
 	git push origin --tags
+	twine upload dist/*
 #	printf '\nUpgrade vibration toolbox with release and sha256 sum:'
 #	printf '\nOK, no sha256 sum yet:'
 #	shasum -a 256 dist/*.tar.gz

@@ -22,7 +22,8 @@ Play with it on `mybinder.org`_!
 
 | *0.76*: Printing made better, allows outputs, added ``print_out``
 |         boolean to turn off printing.
-| *0.80*: Return to previous interface while still enabling returned |         LaTeX string.
+| *0.80*: Return to previous interface while still enabling returned
+|         LaTeX string.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -91,7 +92,8 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 | *0.75*: output improvements (short-lived release)
 | *0.76*: Printing made better, allows outputs, added ``print_out``
 |         boolean to turn off printing
-| *0.80*: Return to previous interface while still enabling returned |         LaTeX string.
+| *0.80*: Return to previous interface while still enabling returned
+|         LaTeX string.
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

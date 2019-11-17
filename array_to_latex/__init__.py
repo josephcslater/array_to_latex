@@ -1,12 +1,12 @@
 """
-Convert numpy arrays and numerical dataframes to LaTeX.
+Return numpy arrays and Pandas dataframes as LaTeX.
 
-Provides `to_ltx` and `to_clp` which convert numpy arrays to
-LaTeX form.
+Provides `to_ltx` and `to_clp` which convert numpy arrays and Pandas dataframes
+arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.76'
+__version__ = '0.80'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -64,8 +64,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
 
 def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
                        imstring='j', row=True, mathform=True):
-    r"""
-    Print a LaTeX array given a numpy array.
+    r"""Return a LaTeX array given a numpy array.
 
     Parameters
     ----------
@@ -158,10 +157,6 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
 
     out = out[:-3] + '\n' + r'\end{' + arraytype + '}'
 
-    if nargout == 1:
-        return out
-
-    # print(out)
     return out
 
 
@@ -173,7 +168,7 @@ def _dataframetolatex(df,
                       row=True,
                       mathform=True):
     r"""
-    Print a LaTeX array given a Pandas DataFrame array.
+    Return a LaTeX array given a Pandas DataFrame array.
 
     Parameters
     ----------
@@ -231,7 +226,7 @@ def _dataframetolatex(df,
     a = _np.array(df)
     out = r'\begin{' + arraytype + '}'
 
-    if arraytype is 'tabular':
+    if arraytype == 'tabular':
         out += r'{l'
         for column in columns:
             out += 'r'
@@ -239,7 +234,7 @@ def _dataframetolatex(df,
 
     out += '\n'
 
-    if arraytype is 'tabular':
+    if arraytype == 'tabular':
         out += '\\toprule\n'
 
         out = out + '     '
@@ -247,9 +242,7 @@ def _dataframetolatex(df,
             out += '& ' + column + ' '
         out += r'\\\n'
 
-#    out +='\n'
-
-    if arraytype is 'tabular':
+    if arraytype == 'tabular':
         out += '\\midrule\n'
 
     for i in _np.arange(a.shape[0]):
@@ -296,11 +289,10 @@ def _dataframetolatex(df,
 
     return out
 
-
 def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
            imstring='j', row=True, mathform=True, print_out=True):
     r"""
-    Print a LaTeX array given a numpy array or Pandas dataframe.
+    Print or return a LaTeX array given a numpy array or Pandas dataframe.
 
     Parameters
     ----------
@@ -369,6 +361,7 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
                                   nargout=nargout, imstring=imstring)
     if print_out is True:
         print(latex)
+        return
 
     return latex
 

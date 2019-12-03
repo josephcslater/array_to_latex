@@ -24,6 +24,7 @@ Play with it on `mybinder.org`_!
 |         boolean to turn off printing.
 | *0.80*: Return to previous interface while still enabling returned
 |         LaTeX string.
+| *0.81*: Bug fixes in requirements and to_clp
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -94,6 +95,7 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 |         boolean to turn off printing
 | *0.80*: Return to previous interface while still enabling returned
 |         LaTeX string.
+| *0.81*: Bug fixes in requirements and to_clp
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

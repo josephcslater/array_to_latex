@@ -71,7 +71,7 @@ so you can now use your function ``to_tex`` repeatedly with your specified setti
     import array_to_latex as a2l
     help(a2l.to_ltx)
 
-An interesting alternative approach is `np array to latex <https://github.com/bbercovici/np_array_to_latex>`_.
+Interesting alternative approaches are `np_array_to_latex <https://github.com/bbercovici/np_array_to_latex>`_ and `tab2latex (convert numpy array to longtable file) <https://pypi.org/project/tab2latex/>`_.
 
 Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 

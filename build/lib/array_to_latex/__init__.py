@@ -6,7 +6,7 @@ arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.80'
+__version__ = '0.81'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -52,7 +52,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
     See `to_ltx` for further examples.
 
     """
-    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1, imstring=imstring)
+    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1, imstring=imstring, print_out=False)
     try:
         import clipboard as _clipboard
         _clipboard.copy(b)

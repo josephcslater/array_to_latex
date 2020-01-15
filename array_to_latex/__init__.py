@@ -6,7 +6,7 @@ arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.81'
+__version__ = '0.82'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -353,12 +353,15 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
                                    nargout=nargout, imstring=imstring,
                                    row=row, mathform=mathform)
 
-    if isinstance(a, _pd.core.frame.DataFrame):
+    elif isinstance(a, _pd.core.frame.DataFrame):
 
         if arraytype is None:
             arraytype = 'tabular'
         latex = _dataframetolatex(a, frmt=frmt, arraytype=arraytype,
                                   nargout=nargout, imstring=imstring)
+    else:
+        raise TypeError("Argument should be a "
+                        "numpy array or a pandas DataFrame.")
     if print_out is True:
         print(latex)
         return

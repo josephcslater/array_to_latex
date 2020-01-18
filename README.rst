@@ -18,6 +18,8 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 Play with it on `mybinder.org`_!
 
+Revent update follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
+
 | *0.80*: Return to previous interface while still enabling returned
 |         LaTeX string.
 | *0.81*: Bug fixes in requirements and to_clp
@@ -97,3 +99,4 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
+.. _`readme`: https://github.com/josephcslater/array_to_latex/blob/master/README.rst

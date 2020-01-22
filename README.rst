@@ -1,5 +1,5 @@
-Convert NumPy/SciPy arrays to formatted LaTeX arrays
-====================================================
+Convert NumPy/SciPy arrays and Pandas Dataframes to formatted LaTeX arrays
+==========================================================================
 
 .. image:: https://badge.fury.io/py/array-to-latex.png/
     :target: http://badge.fury.io/py/array-to-latex

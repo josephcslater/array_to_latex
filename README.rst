@@ -43,7 +43,7 @@ will print the LaTeX code to your output.
     import numpy as np
     import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    latex_code = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
+    latex_code = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array', print_out=False)
 
 will put the LaTeX code into variable ``latex_code``.
 

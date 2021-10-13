@@ -18,7 +18,7 @@ The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical D
 
 Play with it on `mybinder.org`_!
 
-A NumPy-focused reenvisioned converter based in part on this is `numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also also available *pip install*. It incorporate more sophisticated "sub" markup capabilities. Check it out!
+A NumPy-focused reenvisioned converter based, in part, on this is `numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also also available *pip install*. It incorporate more sophisticated "sub" markup capabilities. Check it out!
 
 Recent updates follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
 

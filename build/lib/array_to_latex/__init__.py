@@ -9,7 +9,7 @@ arrays to LaTeX form.
 __version__ = '0.82'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
-__author__ = u'Joseph C. Slater'
+__author__ = 'Joseph C. Slater'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2018 Joseph C. Slater'
 

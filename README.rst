@@ -14,11 +14,17 @@ Convert NumPy/SciPy arrays and Pandas Dataframes to formatted LaTeX arrays
 .. image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
 
-The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX array or table using `Python 3.x style`_ formatting of the result. Note that it **does not** add the column formatting arguments at this time (for example, `{r|r|r}`). I'm happy to have someone create a good solution that provides a default if the array environment is chosen and also allows user definition, but leaves it otherwise for `bmatrix`, etc. 
+The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX 
+array or table using `Python 3.x style`_ formatting of the result. Note that as of *0.83* it **does** add 
+the column formatting arguments (for example, `{ccc...}`) when the user chooses to use `array`. I'm happy 
+to have someone create a better solution but this at least makes a copied array immediately usable. I 
+prefer `bmatrix` or similar. `
 
 Play with it on `mybinder.org`_!
 
-A NumPy-focused reenvisioned converter based, in part, on this is `numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also also available *pip install*. It incorporate more sophisticated "sub" markup capabilities. Check it out!
+A NumPy-focused re-envisioned converter based, in part, on this is 
+`numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also, available 
+*pip install*. It incorporates more sophisticated "sub" markup capabilities. Check it out!
 
 Recent updates follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
 
@@ -26,6 +32,7 @@ Recent updates follow, with a more complete list towards the end of this documen
 |         LaTeX string.
 | *0.81*: Bug fixes in requirements and to_clp
 | *0.82*: Raise ImportError exception when incorrect datatype used.
+| *0.83*: Now puts a default format in when returning as an `array` object.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -45,7 +52,7 @@ will print the LaTeX code to your output.
     import numpy as np
     import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    latex_code = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array', print_out=False)
+    latex_code = a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'bmatrix', print_out=False)
 
 will put the LaTeX code into variable ``latex_code``.
 
@@ -54,7 +61,7 @@ will put the LaTeX code into variable ``latex_code``.
     import numpy as np
     import array_to_latex as a2l
     A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'array')
+    a2l.to_clp(A, frmt = '{:6.2f}', arraytype = 'bmatrix')
 
 will put the array onto your clipboard.
 
@@ -62,7 +69,7 @@ If you will be using the same conversion over and over, you can define your own 
 
 .. code:: python
 
-    to_tex = lambda A : a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array', mathform=True)
+    to_tex = lambda A : a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'bmatrix', mathform=True)
     to_tex(A)
 
 so you can now use your function ``to_tex`` repeatedly with your specified settings. More detailed information on usage is in the help.
@@ -74,7 +81,7 @@ so you can now use your function ``to_tex`` repeatedly with your specified setti
 
 Interesting alternative approaches are `np_array_to_latex <https://github.com/bbercovici/np_array_to_latex>`_ and `tab2latex (convert numpy array to longtable file) <https://pypi.org/project/tab2latex/>`_.
 
-Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
+Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_. 
 
 | *New in* 0.37: Now handles complex arrays.
 | *New in* 0.38: Aligns columns neatly.
@@ -98,6 +105,7 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_
 |         LaTeX string.
 | *0.81*: Bug fixes in requirements and to_clp
 | *0.82*: Raise ImportError exception when incorrect datatype used.
+| *0.83*: Add formatting defaults when using array versus bmatrix, etc.
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

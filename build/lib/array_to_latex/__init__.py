@@ -6,10 +6,10 @@ arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.82'
+__version__ = '0.83'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
-__author__ = 'Joseph C. Slater'
+__author__ = u'Joseph C. Slater'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2018 Joseph C. Slater'
 
@@ -95,19 +95,19 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{c, c}
         1.23 &   23.46\\
       456.23 &    8.24
     \end{array}
     None
     >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{c, c}
       1.23e+00 &  2.35e+01\\
       4.56e+02 &  8.24e+00
     \end{array}
     None
     >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{c, c}
       1.23 &  23.5\\
       456 &  8.24
     \end{array}
@@ -121,8 +121,16 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
         a = _np.array([a])
         if row is False:
             a = a.T
+    
+    arrayformat = ''
 
-    out = r'\begin{' + arraytype + '}\n'
+    if arraytype == 'array':
+        arrayformat = '{'
+        for j in _np.arange(a.shape[1]):
+            arrayformat = arrayformat + ' c,'
+        arrayformat = arrayformat[:-1] + '}'
+
+    out = r'\begin{' + arraytype + '}' + arrayformat + '\n'
     for i in _np.arange(a.shape[0]):
         out = out + ' '
         for j in _np.arange(a.shape[1]):

@@ -14,3 +14,4 @@ array_to_latex.egg*
 .ipynb_checkpoints/Examples-checkpoint.ipynb
 array_to_latex.code-workspace
 borg-env
+.ipynb_checkpoints/*

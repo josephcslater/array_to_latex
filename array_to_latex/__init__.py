@@ -62,35 +62,6 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
               'means to use this function')
 
 
-def to_coords(a, frmt='{:6.2f}'):
-    r"""Retrun a list of coordinates given a numpy array.
-
-    Parameters
-    ----------
-    a         : float array
-    frmt      : string
-        python 3 formatter, optional-
-        https://mkaz.tech/python-string-format.html
-    
-    Returns
-    -------
-    out: str
-        list of coordinates in the form (x1,y1),(x2,y2),...
-    
-    Examples
-    --------
-    >>> import numpy as np
-    >>> import array_to_latex as a2l
-    >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
-    >>> a2l.to_coords(A, frmt = '{:1.2f}')
-    '{(1.23,23.46),(456.23,8.24)}'
-    """
-    out = '{'
-    out += ','.join([f"({','.join([frmt.format(x) for x in r])})" for r in a])
-    out += '}'
-    return out
-
-
 def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
                        imstring='j', row=True, mathform=True):
     r"""Return a LaTeX array given a numpy array.
@@ -141,6 +112,9 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
       456 &  8.24
     \end{array}
     None
+    >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
+    {(1.23,23.46),(456.23,8.24)}
+    None
 
     """
     if len(a.shape) > 2:
@@ -150,6 +124,10 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
         a = _np.array([a])
         if row is False:
             a = a.T
+
+    if arraytype == "coords":
+        coords = ['(' + ','.join([frmt.format(x) for x in r]) + ')' for r in a]
+        return '{' + ','.join(coords) + '}'
     
     arrayformat = ''
 
@@ -379,6 +357,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
       1.23 &  23.5\\
       456  &  8.24
     \end{array}
+    None
+    >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
+    {(1.23,23.46),(456.23,8.24)}
     None
 
     """

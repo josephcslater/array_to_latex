@@ -121,12 +121,12 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
         a = _np.array([a])
         if row is False:
             a = a.T
-    
+
     arrayformat = ''
 
     if arraytype == 'array':
         arrayformat = '{'
-        for j in _np.arange(a.shape[1]):
+        for _ in _np.arange(a.shape[1]):
             arrayformat = arrayformat + ' c,'
         arrayformat = arrayformat[:-1] + '}'
 
@@ -134,14 +134,8 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' '
         for j in _np.arange(a.shape[1]):
-            if _np.real(a[i, j]) < 0:
-                leadstr = ''
-            else:
-                leadstr = ' '
-            if '.' not in frmt.format(a[i, j]):
-                dot_space = ' '
-            else:
-                dot_space = ''
+            leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+            dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
             if _np.iscomplexobj(a[i, j]):
                 out = (out + leadstr
                        + math_form(frmt.format(_np.real(a[i, j])),
@@ -236,7 +230,7 @@ def _dataframetolatex(df,
 
     if arraytype == 'tabular':
         out += r'{l'
-        for column in columns:
+        for _ in columns:
             out += 'r'
         out += r'}'
 
@@ -245,12 +239,11 @@ def _dataframetolatex(df,
     if arraytype == 'tabular':
         out += '\\toprule\n'
 
-        out = out + '     '
+        out += '     '
         for column in columns:
             out += '& ' + column + ' '
         out += r'\\\n'
 
-    if arraytype == 'tabular':
         out += '\\midrule\n'
 
     for i in _np.arange(a.shape[0]):
@@ -258,18 +251,11 @@ def _dataframetolatex(df,
         for j in _np.arange(a.shape[1]):
             if isinstance(a[i, j], str):
                 leadstr = ' '
-                dot_space = (max([len(pet)
-                                  for pet in a[:, j]]) - len(a[i, j])) * ' '
+                dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
                 out = (out + leadstr + a[i, j] + dot_space + ' & ')
             else:
-                if _np.real(a[i, j]) < 0:
-                    leadstr = ''
-                else:
-                    leadstr = ' '
-                if '.' not in frmt.format(a[i, j]):
-                    dot_space = ' '
-                else:
-                    dot_space = ''
+                leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+                dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
                 if _np.iscomplexobj(a[i, j]):
                     out = (out + leadstr
                            + math_form(frmt.format(_np.real(a[i, j])),

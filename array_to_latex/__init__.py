@@ -388,7 +388,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
 
 
 def math_form(number, is_imaginary=False, mathform=True):
-    if mathform:
-        if 'e' in number:
+    if 'e' in number:
+        if mathform:
             number = number.replace('e', '\\times 10^{') + '}'
+        else:
+            number = number.replace('e', '\\mathrm{e}{') + '}'
     return number

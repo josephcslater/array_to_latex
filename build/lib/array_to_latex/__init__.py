@@ -6,7 +6,7 @@ arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.83'
+__version__ = '0.90'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -112,6 +112,9 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
       456 &  8.24
     \end{array}
     None
+    >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
+    {(1.23,23.46),(456.23,8.24)}
+    None
 
     """
     if len(a.shape) > 2:
@@ -121,6 +124,10 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
         a = _np.array([a])
         if row is False:
             a = a.T
+
+    if arraytype == "coords":
+        coords = ['(' + ','.join([frmt.format(x) for x in r]) + ')' for r in a]
+        return '{' + ','.join(coords) + '}'
     
     arrayformat = ''
 
@@ -350,6 +357,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
       1.23 &  23.5\\
       456  &  8.24
     \end{array}
+    None
+    >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
+    {(1.23,23.46),(456.23,8.24)}
     None
 
     """

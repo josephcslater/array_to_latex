@@ -15,7 +15,7 @@ Convert NumPy/SciPy arrays and Pandas Dataframes to formatted LaTeX arrays
    :target: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
 
 The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX 
-array or table using `Python 3.x style`_ formatting of the result or a format useable for plotting within LaTeX using pgfplots. Note that as of *0.83* it **does** add 
+array or table using `Python 3.x style`_ formatting of the result or a format usable for plotting within LaTeX using pgfplots. Note that as of *0.83* it **does** add 
 the column formatting arguments (for example, `{ccc...}`) when the user chooses to use `array`. I'm happy 
 to have someone create a better solution but this at least makes a copied array immediately usable. I 
 prefer `bmatrix` or similar. `

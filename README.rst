@@ -15,7 +15,7 @@ Convert NumPy/SciPy arrays and Pandas Dataframes to formatted LaTeX arrays
    :target: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
 
 The module ``array_to_latex`` converts a NumPy/SciPy array or Pandas Numerical DataFrame to a LaTeX 
-array or table using `Python 3.x style`_ formatting of the result. Note that as of *0.83* it **does** add 
+array or table using `Python 3.x style`_ formatting of the result or a format useable for plotting within LaTeX using pgfplots. Note that as of *0.83* it **does** add 
 the column formatting arguments (for example, `{ccc...}`) when the user chooses to use `array`. I'm happy 
 to have someone create a better solution but this at least makes a copied array immediately usable. I 
 prefer `bmatrix` or similar. `
@@ -33,6 +33,7 @@ Recent updates follow, with a more complete list towards the end of this documen
 | *0.81*: Bug fixes in requirements and to_clp
 | *0.82*: Raise ImportError exception when incorrect datatype used.
 | *0.83*: Now puts a default format in when returning as an `array` object.
+| *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -106,6 +107,7 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_.
 | *0.81*: Bug fixes in requirements and to_clp
 | *0.82*: Raise ImportError exception when incorrect datatype used.
 | *0.83*: Add formatting defaults when using array versus bmatrix, etc.
+| *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

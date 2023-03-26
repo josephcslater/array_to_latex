@@ -6,7 +6,7 @@ arrays to LaTeX form.
 """
 
 # Note- version must also be set in setup.py
-__version__ = '0.90'
+__version__ = '0.91'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 __author__ = u'Joseph C. Slater'
@@ -128,12 +128,12 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     if arraytype == "coords":
         coords = ['(' + ','.join([frmt.format(x) for x in r]) + ')' for r in a]
         return '{' + ','.join(coords) + '}'
-    
+
     arrayformat = ''
 
     if arraytype == 'array':
         arrayformat = '{'
-        for j in _np.arange(a.shape[1]):
+        for _ in _np.arange(a.shape[1]):
             arrayformat = arrayformat + ' c,'
         arrayformat = arrayformat[:-1] + '}'
 
@@ -141,14 +141,8 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' '
         for j in _np.arange(a.shape[1]):
-            if _np.real(a[i, j]) < 0:
-                leadstr = ''
-            else:
-                leadstr = ' '
-            if '.' not in frmt.format(a[i, j]):
-                dot_space = ' '
-            else:
-                dot_space = ''
+            leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+            dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
             if _np.iscomplexobj(a[i, j]):
                 out = (out + leadstr
                        + math_form(frmt.format(_np.real(a[i, j])),
@@ -243,7 +237,7 @@ def _dataframetolatex(df,
 
     if arraytype == 'tabular':
         out += r'{l'
-        for column in columns:
+        for _ in columns:
             out += 'r'
         out += r'}'
 
@@ -252,12 +246,11 @@ def _dataframetolatex(df,
     if arraytype == 'tabular':
         out += '\\toprule\n'
 
-        out = out + '     '
+        out += '     '
         for column in columns:
             out += '& ' + column + ' '
         out += r'\\\n'
 
-    if arraytype == 'tabular':
         out += '\\midrule\n'
 
     for i in _np.arange(a.shape[0]):
@@ -265,18 +258,11 @@ def _dataframetolatex(df,
         for j in _np.arange(a.shape[1]):
             if isinstance(a[i, j], str):
                 leadstr = ' '
-                dot_space = (max([len(pet)
-                                  for pet in a[:, j]]) - len(a[i, j])) * ' '
+                dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
                 out = (out + leadstr + a[i, j] + dot_space + ' & ')
             else:
-                if _np.real(a[i, j]) < 0:
-                    leadstr = ''
-                else:
-                    leadstr = ' '
-                if '.' not in frmt.format(a[i, j]):
-                    dot_space = ' '
-                else:
-                    dot_space = ''
+                leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+                dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
                 if _np.iscomplexobj(a[i, j]):
                     out = (out + leadstr
                            + math_form(frmt.format(_np.real(a[i, j])),
@@ -388,7 +374,9 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
 
 
 def math_form(number, is_imaginary=False, mathform=True):
-    if mathform:
-        if 'e' in number:
+    if 'e' in number:
+        if mathform:
             number = number.replace('e', '\\times 10^{') + '}'
+        else:
+            number = number.replace('e', '\\mathrm{e}{') + '}'
     return number

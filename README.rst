@@ -28,12 +28,11 @@ A NumPy-focused re-envisioned converter based, in part, on this is
 
 Recent updates follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
 
-| *0.80*: Return to previous interface while still enabling returned
-|         LaTeX string.
 | *0.81*: Bug fixes in requirements and to_clp
 | *0.82*: Raise ImportError exception when incorrect datatype used.
 | *0.83*: Now puts a default format in when returning as an `array` object.
 | *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
+| *0.91*: Improve the output for scientific `e` notation.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -108,6 +107,7 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_.
 | *0.82*: Raise ImportError exception when incorrect datatype used.
 | *0.83*: Add formatting defaults when using array versus bmatrix, etc.
 | *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
+| *0.91*: Improve the output for scientific `e` notation.
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

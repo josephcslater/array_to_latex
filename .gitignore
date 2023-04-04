@@ -17,3 +17,4 @@ borg-env
 .ipynb_checkpoints/*
 .venv
 *.whl
+*.whl

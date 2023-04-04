@@ -18,3 +18,4 @@ borg-env
 .venv
 *.whl
 build/*
+dist/*

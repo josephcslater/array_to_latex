@@ -16,3 +16,4 @@ array_to_latex.code-workspace
 borg-env
 .ipynb_checkpoints/*
 .venv
+*.whl

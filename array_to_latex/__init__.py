@@ -19,7 +19,7 @@ import pandas as _pd
 
 def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
     r"""
-    Return a LaTeX array the the clipboard given a numpy array.
+    Return a LaTeX array to the clipboard given a numpy array.
 
     Parameters
     ----------
@@ -141,25 +141,30 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' '
         for j in _np.arange(a.shape[1]):
-            leadstr = '' if _np.real(a[i, j]) < 0 else ' '
-            dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
-            if _np.iscomplexobj(a[i, j]):
-                out = (out + leadstr
-                       + math_form(frmt.format(_np.real(a[i, j])),
-                                   mathform=mathform)
-                       + ' + '
-                       + math_form(frmt.format(_np.imag(a[i, j])),
-                                   is_imaginary=True,
-                                   mathform=mathform)
-                       + imstring
-                       + dot_space + ' & ')
+            if isinstance(a[i, j], str):
+                leadstr = ' '
+                dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
+                out = (out + leadstr + a[i, j] + dot_space + ' & ')
             else:
-                out = (out
-                       + leadstr
-                       + math_form(frmt.format(_np.real(a[i, j])),
-                                   mathform=mathform)
-                       + dot_space
-                       + r' & ')
+                leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+                dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
+                if _np.iscomplexobj(a[i, j]):
+                    out = (out + leadstr
+                           + math_form(frmt.format(_np.real(a[i, j])),
+                                       mathform=mathform)
+                           + ' + '
+                           + math_form(frmt.format(_np.imag(a[i, j])),
+                                       is_imaginary=True,
+                                       mathform=mathform)
+                           + imstring
+                           + dot_space + ' & ')
+                else:
+                    out = (out
+                           + leadstr
+                           + math_form(frmt.format(_np.real(a[i, j])),
+                                       mathform=mathform)
+                           + dot_space
+                           + r' & ')
 
         out = out[:-3]
         out = out + '\\\\\n'

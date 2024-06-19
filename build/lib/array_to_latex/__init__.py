@@ -19,7 +19,7 @@ import pandas as _pd
 
 def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
     r"""
-    Return a LaTeX array the the clipboard given a numpy array.
+    Return a LaTeX array to the clipboard given a numpy array.
 
     Parameters
     ----------

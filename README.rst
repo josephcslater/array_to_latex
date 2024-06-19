@@ -33,6 +33,7 @@ Recent updates follow, with a more complete list towards the end of this documen
 | *0.83*: Now puts a default format in when returning as an `array` object.
 | *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
 | *0.91*: Improve the output for scientific `e` notation.
+| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
 
@@ -108,6 +109,8 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_.
 | *0.83*: Add formatting defaults when using array versus bmatrix, etc.
 | *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
 | *0.91*: Improve the output for scientific `e` notation.
+| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
+
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb

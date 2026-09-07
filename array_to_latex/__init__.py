@@ -5,6 +5,7 @@ Provides `to_ltx` and `to_clp` which convert numpy arrays and Pandas dataframes
 arrays to LaTeX form.
 """
 
+
 # Note- version must also be set in setup.py
 __version__ = '0.92'
 __all__ = ['to_clp', 'to_ltx', '__version__']
@@ -57,9 +58,8 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
         import clipboard as _clipboard
         _clipboard.copy(b)
     except ImportError:
-        print('\nPackage ''clipboard'' is not installed')
-        print('pip install clipboard\nor install via other ',
-              'means to use this function')
+        print("\nPackage 'clipboard' is not installed")
+        print('pip install clipboard\nor install via other means to use this function')
 
 
 def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
@@ -132,10 +132,7 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     arrayformat = ''
 
     if arraytype == 'array':
-        arrayformat = '{'
-        for _ in _np.arange(a.shape[1]):
-            arrayformat = arrayformat + ' c,'
-        arrayformat = arrayformat[:-1] + '}'
+        arrayformat = '{ ' + ', '.join(['c'] * a.shape[1]) + '}'
 
     out = r'\begin{' + arraytype + '}' + arrayformat + '\n'
     for i in _np.arange(a.shape[0]):
@@ -144,27 +141,16 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
             if isinstance(a[i, j], str):
                 leadstr = ' '
                 dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
-                out = (out + leadstr + a[i, j] + dot_space + ' & ')
+                out += leadstr + a[i, j] + dot_space + ' & '
             else:
                 leadstr = '' if _np.real(a[i, j]) < 0 else ' '
                 dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
                 if _np.iscomplexobj(a[i, j]):
-                    out = (out + leadstr
-                           + math_form(frmt.format(_np.real(a[i, j])),
-                                       mathform=mathform)
-                           + ' + '
-                           + math_form(frmt.format(_np.imag(a[i, j])),
-                                       is_imaginary=True,
-                                       mathform=mathform)
-                           + imstring
-                           + dot_space + ' & ')
+                    real_str = math_form(frmt.format(_np.real(a[i, j])), mathform=mathform)
+                    imag_str = math_form(frmt.format(_np.imag(a[i, j])), is_imaginary=True, mathform=mathform)
+                    out += leadstr + real_str + ' + ' + imag_str + imstring + dot_space + ' & '
                 else:
-                    out = (out
-                           + leadstr
-                           + math_form(frmt.format(_np.real(a[i, j])),
-                                       mathform=mathform)
-                           + dot_space
-                           + r' & ')
+                    out += leadstr + math_form(frmt.format(_np.real(a[i, j])), mathform=mathform) + dot_space + r' & '
 
         out = out[:-3]
         out = out + '\\\\\n'
@@ -264,25 +250,16 @@ def _dataframetolatex(df,
             if isinstance(a[i, j], str):
                 leadstr = ' '
                 dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
-                out = (out + leadstr + a[i, j] + dot_space + ' & ')
+                out += leadstr + a[i, j] + dot_space + ' & '
             else:
                 leadstr = '' if _np.real(a[i, j]) < 0 else ' '
                 dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
                 if _np.iscomplexobj(a[i, j]):
-                    out = (out + leadstr
-                           + math_form(frmt.format(_np.real(a[i, j])),
-                                       mathform=mathform)
-                           + ' + '
-                           + math_form(frmt.format(_np.imag(a[i, j])),
-                                       is_imaginary=True,
-                                       mathform=mathform)
-                           + imstring
-                           + dot_space + ' & ')
+                    real_str = math_form(frmt.format(_np.real(a[i, j])), mathform=mathform)
+                    imag_str = math_form(frmt.format(_np.imag(a[i, j])), is_imaginary=True, mathform=mathform)
+                    out += leadstr + real_str + ' + ' + imag_str + imstring + dot_space + ' & '
                 else:
-                    out = (out + leadstr
-                           + math_form(frmt.format(a[i, j]),
-                                       mathform=mathform)
-                           + dot_space + ' & ')
+                    out += leadstr + math_form(frmt.format(a[i, j]), mathform=mathform) + dot_space + ' & '
 
         out = out[:-3]
         out += '\\\\\n'

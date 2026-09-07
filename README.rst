@@ -26,6 +26,11 @@ A NumPy-focused re-envisioned converter based, in part, on this is
 `numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also, available 
 *pip install*. It incorporates more sophisticated "sub" markup capabilities. Check it out!
 
+| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
+| *1.0.0*: Validate ``arraytype``, fix docstring/doctest inaccuracies, remove unused
+|          ``nargout`` parameter (breaking), make ``clipboard`` an optional install
+|          extra, add unit tests and GitHub Actions CI.
+
 Recent updates follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
 
 | *0.81*: Bug fixes in requirements and to_clp
@@ -35,7 +40,7 @@ Recent updates follow, with a more complete list towards the end of this documen
 | *0.91*: Improve the output for scientific `e` notation.
 | *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
 
-Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**.
+Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**. If you want to use ``to_clp`` to copy results directly to your clipboard, install the optional extra with ``pip install --user array_to_latex[clipboard]``.
 
 Please read the help. It explains all options. To try it, see `the online mybinder.org demo <https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb>`_. It documents illustrates application to numerical Pandas DataFrames.
 
@@ -110,6 +115,9 @@ Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_.
 | *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
 | *0.91*: Improve the output for scientific `e` notation.
 | *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
+| *1.0.0*: Validate ``arraytype``, fix docstring/doctest inaccuracies, remove unused
+|          ``nargout`` parameter (breaking), make ``clipboard`` an optional install
+|          extra, add unit tests and GitHub Actions CI.
 
 
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html

@@ -3,6 +3,7 @@ array_to_latex/__pycache__
  Untitled*.*
 
 __pycache__/*
+**/__pycache__/
 .cache/*
 *.gz
 
@@ -19,3 +20,4 @@ borg-env
 *.whl
 build/*
 dist/*
+.pytest_cache/

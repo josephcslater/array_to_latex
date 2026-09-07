@@ -7,8 +7,13 @@ arrays to LaTeX form.
 
 
 # Note- version must also be set in setup.py
-__version__ = '0.92'
+__version__ = '1.0.0'
 __all__ = ['to_clp', 'to_ltx', '__version__']
+
+_VALID_ARRAYTYPES = frozenset({
+    'bmatrix', 'pmatrix', 'vmatrix', 'Vmatrix', 'Bmatrix', 'matrix',
+    'array', 'coords', 'tabular',
+})
 
 __author__ = u'Joseph C. Slater'
 __license__ = 'MIT'
@@ -53,16 +58,43 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
     See `to_ltx` for further examples.
 
     """
-    b = to_ltx(a, frmt=frmt, arraytype=arraytype, nargout=1, imstring=imstring, print_out=False)
+    b = to_ltx(a, frmt=frmt, arraytype=arraytype, imstring=imstring, print_out=False)
     try:
         import clipboard as _clipboard
-        _clipboard.copy(b)
     except ImportError:
         print("\nPackage 'clipboard' is not installed")
         print('pip install clipboard\nor install via other means to use this function')
+        return
+    try:
+        _clipboard.copy(b)
+    except Exception as exc:
+        print("\nCould not copy to clipboard: {}".format(exc))
+        print("Your system may be missing a clipboard backend "
+              "(e.g. xclip/xsel on Linux).")
 
 
-def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
+def _format_cell(a, i, j, frmt, imstring, mathform):
+    """Format a single array/DataFrame cell (a[i, j]) as a LaTeX-ready string.
+
+    Handles string columns (padded to align on the widest entry in that
+    column), real numbers, and complex numbers consistently for both
+    `_numpyarraytolatex` and `_dataframetolatex`.
+    """
+    if isinstance(a[i, j], str):
+        leadstr = ' '
+        dot_space = (max(len(pet) for pet in a[:, j]) - len(a[i, j])) * ' '
+        return leadstr + a[i, j] + dot_space
+    leadstr = '' if _np.real(a[i, j]) < 0 else ' '
+    dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
+    if _np.iscomplexobj(a[i, j]):
+        real_str = math_form(frmt.format(_np.real(a[i, j])), mathform=mathform)
+        imag_str = math_form(frmt.format(_np.imag(a[i, j])), is_imaginary=True,
+                             mathform=mathform)
+        return leadstr + real_str + ' + ' + imag_str + imstring + dot_space
+    return leadstr + math_form(frmt.format(_np.real(a[i, j])), mathform=mathform) + dot_space
+
+
+def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix',
                        imstring='j', row=True, mathform=True):
     r"""Return a LaTeX array given a numpy array.
 
@@ -95,26 +127,22 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
-    \begin{array}{c, c}
+    \begin{array}{ c, c}
         1.23 &   23.46\\
       456.23 &    8.24
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
-    \begin{array}{c, c}
-      1.23e+00 &  2.35e+01\\
-      4.56e+02 &  8.24e+00
+    \begin{array}{ c, c}
+      1.23\times 10^{+00} &  2.35\times 10^{+01}\\
+      4.56\times 10^{+02} &  8.24\times 10^{+00}
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
-    \begin{array}{c, c}
+    \begin{array}{ c, c}
       1.23 &  23.5\\
-      456 &  8.24
+      456  &  8.24
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
     {(1.23,23.46),(456.23,8.24)}
-    None
 
     """
     if len(a.shape) > 2:
@@ -138,19 +166,7 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
     for i in _np.arange(a.shape[0]):
         out = out + ' '
         for j in _np.arange(a.shape[1]):
-            if isinstance(a[i, j], str):
-                leadstr = ' '
-                dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
-                out += leadstr + a[i, j] + dot_space + ' & '
-            else:
-                leadstr = '' if _np.real(a[i, j]) < 0 else ' '
-                dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
-                if _np.iscomplexobj(a[i, j]):
-                    real_str = math_form(frmt.format(_np.real(a[i, j])), mathform=mathform)
-                    imag_str = math_form(frmt.format(_np.imag(a[i, j])), is_imaginary=True, mathform=mathform)
-                    out += leadstr + real_str + ' + ' + imag_str + imstring + dot_space + ' & '
-                else:
-                    out += leadstr + math_form(frmt.format(_np.real(a[i, j])), mathform=mathform) + dot_space + r' & '
+            out += _format_cell(a, i, j, frmt, imstring, mathform) + ' & '
 
         out = out[:-3]
         out = out + '\\\\\n'
@@ -163,9 +179,7 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix', nargout=0,
 def _dataframetolatex(df,
                       frmt='{:6.2f}',
                       arraytype='tabular',
-                      nargout=0,
                       imstring='j',
-                      row=True,
                       mathform=True):
     r"""
     Return a LaTeX array given a Pandas DataFrame array.
@@ -180,9 +194,6 @@ def _dataframetolatex(df,
         latex array type- `bmatrix` default, optional
     imstring  : string (optional)
         Character for square root of -1. Usually i or j
-    row       : Boolean (optional: default True)
-        If the array is 1-D, should the output be
-            a row (True) or column (False)
     mathform  : Boolean (optional: default True)
         Replace #E# with #\times10^{#}
 
@@ -202,23 +213,20 @@ def _dataframetolatex(df,
     >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{ c, c}
         1.23 &   23.46\\
       456.23 &    8.24
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
-    \begin{array}
-      1.23e+00 &  2.35e+01\\
-      4.56e+02 &  8.24e+00
+    \begin{array}{ c, c}
+      1.23\times 10^{+00} &  2.35\times 10^{+01}\\
+      4.56\times 10^{+02} &  8.24\times 10^{+00}
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{ c, c}
       1.23 &  23.5\\
       456 &  8.24
     \end{array}
-    None
 
     """
     columns = df.columns
@@ -247,19 +255,7 @@ def _dataframetolatex(df,
     for i in _np.arange(a.shape[0]):
         out = out + ' ' + str(rows[i]) + ' & '
         for j in _np.arange(a.shape[1]):
-            if isinstance(a[i, j], str):
-                leadstr = ' '
-                dot_space = (((max(len(pet) for pet in a[:, j]) - len(a[i, j]))) * ' ')
-                out += leadstr + a[i, j] + dot_space + ' & '
-            else:
-                leadstr = '' if _np.real(a[i, j]) < 0 else ' '
-                dot_space = ' ' if '.' not in frmt.format(a[i, j]) else ''
-                if _np.iscomplexobj(a[i, j]):
-                    real_str = math_form(frmt.format(_np.real(a[i, j])), mathform=mathform)
-                    imag_str = math_form(frmt.format(_np.imag(a[i, j])), is_imaginary=True, mathform=mathform)
-                    out += leadstr + real_str + ' + ' + imag_str + imstring + dot_space + ' & '
-                else:
-                    out += leadstr + math_form(frmt.format(a[i, j]), mathform=mathform) + dot_space + ' & '
+            out += _format_cell(a, i, j, frmt, imstring, mathform) + ' & '
 
         out = out[:-3]
         out += '\\\\\n'
@@ -272,7 +268,7 @@ def _dataframetolatex(df,
 
     return out
 
-def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
+def to_ltx(a, frmt='{:1.2f}', arraytype=None,
            imstring='j', row=True, mathform=True, print_out=True):
     r"""
     Print or return a LaTeX array given a numpy array or Pandas dataframe.
@@ -309,42 +305,46 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None, nargout=0,
     >>> import array_to_latex as a2l
     >>> A = np.array([[1.23456, 23.45678],[456.23, 8.239521]])
     >>> a2l.to_ltx(A, frmt = '{:6.2f}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{ c, c}
         1.23 &   23.46\\
       456.23 &    8.24
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:6.2e}', arraytype = 'array')
-    \begin{array}
-      1.23e+00 &  2.35e+01\\
-      4.56e+02 &  8.24e+00
+    \begin{array}{ c, c}
+      1.23\times 10^{+00} &  2.35\times 10^{+01}\\
+      4.56\times 10^{+02} &  8.24\times 10^{+00}
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:.3g}', arraytype = 'array')
-    \begin{array}
+    \begin{array}{ c, c}
       1.23 &  23.5\\
       456  &  8.24
     \end{array}
-    None
     >>> a2l.to_ltx(A, frmt = '{:1.2f}', arraytype = 'coords')
     {(1.23,23.46),(456.23,8.24)}
-    None
 
     """
     if isinstance(a, _np.ndarray):
 
         if arraytype is None:
             arraytype = 'bmatrix'
+        if arraytype not in _VALID_ARRAYTYPES:
+            raise ValueError(
+                "Invalid arraytype {!r}. Must be one of: {}".format(
+                    arraytype, ', '.join(sorted(_VALID_ARRAYTYPES))))
         latex = _numpyarraytolatex(a, frmt=frmt, arraytype=arraytype,
-                                   nargout=nargout, imstring=imstring,
+                                   imstring=imstring,
                                    row=row, mathform=mathform)
 
     elif isinstance(a, _pd.core.frame.DataFrame):
 
         if arraytype is None:
             arraytype = 'tabular'
+        if arraytype not in _VALID_ARRAYTYPES:
+            raise ValueError(
+                "Invalid arraytype {!r}. Must be one of: {}".format(
+                    arraytype, ', '.join(sorted(_VALID_ARRAYTYPES))))
         latex = _dataframetolatex(a, frmt=frmt, arraytype=arraytype,
-                                  nargout=nargout, imstring=imstring)
+                                  imstring=imstring)
     else:
         raise TypeError("Argument should be a "
                         "numpy array or a pandas DataFrame.")

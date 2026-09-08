@@ -6,6 +6,22 @@ on:
   pull_request:
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run ruff
+        run: ruff check array_to_latex tests
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -23,11 +39,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
+          pip install pytest pytest-cov
           pip install .[clipboard]
 
       - name: Install clipboard backend (Linux)
         run: sudo apt-get update && sudo apt-get install -y xclip xvfb
 
       - name: Run tests (unit tests + doctests)
-        run: xvfb-run -a pytest
+        run: xvfb-run -a pytest --cov=array_to_latex --cov-report=term-missing

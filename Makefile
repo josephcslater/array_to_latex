@@ -40,12 +40,8 @@ clean:
 test:
 
 release: clean
-	pip install --user readme_renderer
-	#python setup.py check -r -s
-	#python setup.py register
 	rm -rf dist
-	python setup.py bdist_wheel
-	# python setup.py sdist
+	python -m build
 	git tag v$(VERSION)
 	twine upload --repository array_to_latex dist/* --verbose
 #	printf '\nUpgrade vibration toolbox with release and sha256 sum:'
@@ -54,7 +50,7 @@ release: clean
 
 wheel:
 	rm -rf dist
-	python setup.py bdist_wheel
+	python -m build
 
 gh-pages:
 	git checkout master

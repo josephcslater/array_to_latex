@@ -70,6 +70,28 @@ class TestNumpyArrays:
         with pytest.raises(ValueError):
             a2l.to_ltx(A, print_out=False)
 
+    def test_nan_and_inf_values(self):
+        A = np.array([[1.0, float('nan')], [float('inf'), -float('inf')]])
+        out = a2l.to_ltx(A, print_out=False)
+        assert 'nan' in out
+        assert 'inf' in out
+        assert '-inf' in out
+
+    def test_empty_array_raises(self):
+        A = np.array([[]])
+        with pytest.raises(ValueError):
+            a2l.to_ltx(A, print_out=False)
+
+    def test_empty_1d_array_raises(self):
+        A = np.array([])
+        with pytest.raises(ValueError):
+            a2l.to_ltx(A, print_out=False)
+
+    def test_empty_coords_does_not_raise(self):
+        A = np.empty((0, 2))
+        out = a2l.to_ltx(A, arraytype='coords', print_out=False)
+        assert out == '{}'
+
     def test_invalid_type_raises(self):
         with pytest.raises(TypeError):
             a2l.to_ltx([[1, 2], [3, 4]], print_out=False)
@@ -104,10 +126,26 @@ class TestDataFrame:
         assert out.startswith(r'\begin{array}')
         assert '\\toprule' not in out
 
+    def test_coords(self):
+        df = pd.DataFrame({'a': [1.23456, 456.23], 'b': [23.45678, 8.239521]})
+        out = a2l.to_ltx(df, frmt='{:1.2f}', arraytype='coords', print_out=False)
+        assert out == '{(1.23,23.46),(456.23,8.24)}'
+
     def test_invalid_arraytype_raises(self):
         df = pd.DataFrame({'a': [1.0], 'b': [2.0]})
         with pytest.raises(ValueError):
             a2l.to_ltx(df, arraytype='not_a_type', print_out=False)
+
+    def test_empty_dataframe_raises(self):
+        df = pd.DataFrame({'a': [], 'b': []})
+        with pytest.raises(ValueError):
+            a2l.to_ltx(df, print_out=False)
+
+    def test_nan_values(self):
+        df = pd.DataFrame({'a': [1.0, float('nan')], 'b': [float('inf'), 2.0]})
+        out = a2l.to_ltx(df, print_out=False)
+        assert 'nan' in out
+        assert 'inf' in out
 
 
 class TestClipboard:

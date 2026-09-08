@@ -5,9 +5,13 @@ Provides `to_ltx` and `to_clp` which convert numpy arrays and Pandas dataframes
 arrays to LaTeX form.
 """
 
+from typing import Optional, Union
+
+import numpy as _np
+import pandas as _pd
 
 # Note- version must also be set in setup.py
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __all__ = ['to_clp', 'to_ltx', '__version__']
 
 _VALID_ARRAYTYPES = frozenset({
@@ -15,15 +19,17 @@ _VALID_ARRAYTYPES = frozenset({
     'array', 'coords', 'tabular',
 })
 
-__author__ = u'Joseph C. Slater'
+__author__ = 'Joseph C. Slater'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2018 Joseph C. Slater'
 
-import numpy as _np
-import pandas as _pd
 
-
-def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
+def to_clp(
+    a: Union[_np.ndarray, _pd.DataFrame],
+    frmt: str = '{:1.2f}',
+    arraytype: str = 'bmatrix',
+    imstring: str = 'j',
+) -> None:
     r"""
     Return a LaTeX array to the clipboard given a numpy array.
 
@@ -68,7 +74,7 @@ def to_clp(a, frmt='{:1.2f}', arraytype='bmatrix', imstring='j'):
     try:
         _clipboard.copy(b)
     except Exception as exc:
-        print("\nCould not copy to clipboard: {}".format(exc))
+        print(f"\nCould not copy to clipboard: {exc}")
         print("Your system may be missing a clipboard backend "
               "(e.g. xclip/xsel on Linux).")
 
@@ -117,6 +123,13 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix',
     out: str
         LaTeX array
 
+    Raises
+    ------
+    ValueError
+        If `a` has more than two dimensions, `a` is empty (unless
+        `arraytype` is ``'coords'``), or `arraytype` is not one of the
+        supported LaTeX array/matrix environment names.
+
     See Also
     --------
     to_clp
@@ -157,15 +170,19 @@ def _numpyarraytolatex(a, frmt='{:6.2f}', arraytype='bmatrix',
         coords = ['(' + ','.join([frmt.format(x) for x in r]) + ')' for r in a]
         return '{' + ','.join(coords) + '}'
 
+    if a.size == 0:
+        raise ValueError('Cannot format an empty array as a LaTeX '
+                         f"'{arraytype}' environment.")
+
     arrayformat = ''
 
     if arraytype == 'array':
         arrayformat = '{ ' + ', '.join(['c'] * a.shape[1]) + '}'
 
     out = r'\begin{' + arraytype + '}' + arrayformat + '\n'
-    for i in _np.arange(a.shape[0]):
+    for i in range(a.shape[0]):
         out = out + ' '
-        for j in _np.arange(a.shape[1]):
+        for j in range(a.shape[1]):
             out += _format_cell(a, i, j, frmt, imstring, mathform) + ' & '
 
         out = out[:-3]
@@ -203,6 +220,13 @@ def _dataframetolatex(df,
     out: str
         LaTeX array
 
+    Raises
+    ------
+    ValueError
+        If `df` is empty (unless `arraytype` is ``'coords'``), or
+        `arraytype` is not one of the supported LaTeX array/table
+        environment names.
+
     See Also
     --------
     to_clp
@@ -232,6 +256,15 @@ def _dataframetolatex(df,
     columns = df.columns
     rows = df.transpose().columns
     a = _np.array(df)
+
+    if arraytype == "coords":
+        coords = ['(' + ','.join([frmt.format(x) for x in r]) + ')' for r in a]
+        return '{' + ','.join(coords) + '}'
+
+    if a.size == 0:
+        raise ValueError('Cannot format an empty DataFrame as a LaTeX '
+                         f"'{arraytype}' environment.")
+
     out = r'\begin{' + arraytype + '}'
 
     if arraytype == 'tabular':
@@ -252,9 +285,9 @@ def _dataframetolatex(df,
 
         out += '\\midrule\n'
 
-    for i in _np.arange(a.shape[0]):
+    for i in range(a.shape[0]):
         out = out + ' ' + str(rows[i]) + ' & '
-        for j in _np.arange(a.shape[1]):
+        for j in range(a.shape[1]):
             out += _format_cell(a, i, j, frmt, imstring, mathform) + ' & '
 
         out = out[:-3]
@@ -268,8 +301,15 @@ def _dataframetolatex(df,
 
     return out
 
-def to_ltx(a, frmt='{:1.2f}', arraytype=None,
-           imstring='j', row=True, mathform=True, print_out=True):
+def to_ltx(
+    a: Union[_np.ndarray, _pd.DataFrame],
+    frmt: str = '{:1.2f}',
+    arraytype: Optional[str] = None,
+    imstring: str = 'j',
+    row: bool = True,
+    mathform: bool = True,
+    print_out: bool = True,
+) -> Optional[str]:
     r"""
     Print or return a LaTeX array given a numpy array or Pandas dataframe.
 
@@ -294,6 +334,15 @@ def to_ltx(a, frmt='{:1.2f}', arraytype=None,
     -------
     out: str
         LaTeX array
+
+    Raises
+    ------
+    ValueError
+        If `a` has more than two dimensions, `a` is empty (unless
+        `arraytype` is ``'coords'``), or `arraytype` is not one of the
+        supported LaTeX array/table environment names.
+    TypeError
+        If `a` is neither a numpy array nor a Pandas DataFrame.
 
     See Also
     --------

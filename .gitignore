@@ -21,3 +21,4 @@ borg-env
 build/*
 dist/*
 .pytest_cache/
+.coverage

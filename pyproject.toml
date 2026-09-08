@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "array_to_latex"
+dynamic = ["version"]
+description = "Return Numpy and Pandas arrays as formatted LaTeX arrays."
+readme = "README.rst"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Joseph C. Slater", email = "joseph.c.slater@gmail.com" },
+]
+keywords = ["latex", "array", "format", "numpy", "scipy"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Education",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Text Processing :: Markup :: LaTeX",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+]
+
+[project.optional-dependencies]
+clipboard = ["clipboard"]
+
+[project.urls]
+Homepage = "https://github.com/josephcslater/array_to_latex/"
+
+[tool.setuptools]
+packages = ["array_to_latex"]
+
+[tool.setuptools.dynamic]
+version = { attr = "array_to_latex.__version__" }

@@ -1,6 +1,9 @@
 Convert NumPy/SciPy arrays and Pandas Dataframes to formatted LaTeX arrays
 ==========================================================================
 
+.. image:: https://github.com/josephcslater/array_to_latex/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/josephcslater/array_to_latex/actions/workflows/test.yml
+
 .. image:: https://badge.fury.io/py/array-to-latex.png/
     :target: http://badge.fury.io/py/array-to-latex
 
@@ -26,19 +29,13 @@ A NumPy-focused re-envisioned converter based, in part, on this is
 `numpyarray_to_latex <https://github.com/benmaier/numpyarray_to_latex>`_. Also, available 
 *pip install*. It incorporates more sophisticated "sub" markup capabilities. Check it out!
 
-| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
+| *1.0.1*: Fix empty-array/DataFrame LaTeX corruption bug, migrate packaging to
+|          ``pyproject.toml``, add type hints, ``ruff`` linting, and coverage reporting.
 | *1.0.0*: Validate ``arraytype``, fix docstring/doctest inaccuracies, remove unused
 |          ``nargout`` parameter (breaking), make ``clipboard`` an optional install
 |          extra, add unit tests and GitHub Actions CI.
 
-Recent updates follow, with a more complete list towards the end of this document. If you don't see the current version in this list it's likely because I (again) forgot to update it when pushing out a new version. Please see the `readme`_ on GitHub.
-
-| *0.81*: Bug fixes in requirements and to_clp
-| *0.82*: Raise ImportError exception when incorrect datatype used.
-| *0.83*: Now puts a default format in when returning as an `array` object.
-| *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
-| *0.91*: Improve the output for scientific `e` notation.
-| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
+See `CHANGELOG.md`_ for the full version history.
 
 Install using ``pip install --user array_to_latex`` from your command prompt, **not the Python prompt**. If you want to use ``to_clp`` to copy results directly to your clipboard, install the optional extra with ``pip install --user array_to_latex[clipboard]``.
 
@@ -89,37 +86,6 @@ Interesting alternative approaches are `np_array_to_latex <https://github.com/bb
 
 Like this module, `buy me a coffee! <https://www.buymeacoffee.com/s6BCSuEiU>`_. 
 
-| *New in* 0.37: Now handles complex arrays.
-| *New in* 0.38: Aligns columns neatly.
-| **0.40: Critical upgrade- 0.37-0.38 formatted incorrectly.**
-| **0.41: Critical upgrade- 0.37-0.40 formatted incorrectly.**
-| *New in* 0.43: Now handles 1-D Arrays. See new option ``row``
-| *New in* 0.50: Now works with Pandas DataFrames
-| *0.51*: Bug fix- remove extra blank lines in DataFrame tabular output
-| *0.52*: A few documentation typos fixed. No code changed.
-| *0.60*: Now handles strings in Pandas Dataframes. Fixes bug in exponentials and handling of exponentials. Please report errors!
-| *0.61*: Minor documentation improvements. No code changed.
-| *0.70*: Added ``mathform``. When set to ``True`` (default), returns 10 to superscript form.
-| *0.71*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
-| *0.72*: Line breaks broke ``readme.rst`` on ``pypi``. No code change.
-| *0.73*: pypi won't handle mathjax. It makes me sad. No code change.
-| *0.74*: Not released
-| *0.75*: output improvements (short-lived release)
-| *0.76*: Printing made better, allows outputs, added ``print_out``
-|         boolean to turn off printing
-| *0.80*: Return to previous interface while still enabling returned
-|         LaTeX string.
-| *0.81*: Bug fixes in requirements and to_clp
-| *0.82*: Raise ImportError exception when incorrect datatype used.
-| *0.83*: Add formatting defaults when using array versus bmatrix, etc.
-| *0.90*: Add ``coords`` format for use in plotting within LaTeX using pgfplots.
-| *0.91*: Improve the output for scientific `e` notation.
-| *0.92*: Allow np.array consisting of strings to be converted (Thanks to Tesla2000)
-| *1.0.0*: Validate ``arraytype``, fix docstring/doctest inaccuracies, remove unused
-|          ``nargout`` parameter (breaking), make ``clipboard`` an optional install
-|          extra, add unit tests and GitHub Actions CI.
-
-
 .. _`Python 3.x style`: https://docs.python.org/3.7/library/string.html
 .. _`mybinder.org`: https://mybinder.org/v2/gh/josephcslater/array_to_latex/master?filepath=Examples.ipynb
-.. _`readme`: https://github.com/josephcslater/array_to_latex/blob/master/README.rst
+.. _`CHANGELOG.md`: https://github.com/josephcslater/array_to_latex/blob/master/CHANGELOG.md

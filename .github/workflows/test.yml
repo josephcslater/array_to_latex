@@ -26,5 +26,8 @@ jobs:
           pip install pytest
           pip install .[clipboard]
 
+      - name: Install clipboard backend (Linux)
+        run: sudo apt-get update && sudo apt-get install -y xclip xvfb
+
       - name: Run tests (unit tests + doctests)
-        run: pytest
+        run: xvfb-run -a pytest
